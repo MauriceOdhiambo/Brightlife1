@@ -104,3 +104,14 @@ npm run dev
 ```
 
 The server defaults to `http://localhost:3000`. Run `npm run check` to validate the server and browser JavaScript syntax.
+
+## Sitemap and member experience refinement (October 2026)
+
+- Increased the public-site brand mark and member workspace logo while keeping the shared header responsive.
+- Reduced homepage project-card copy and made each programme card open a dedicated, sitemap-styled project profile. The Water Project continues to use its dedicated detail page.
+- Added consistent detail-page structures for education, health and wellbeing, economic empowerment, community development, poultry, vocational skills and entrepreneurship.
+- Detail pages read published administrator project titles, descriptions and images where available, in addition to the public project-card integration.
+- Refined login and registration form spacing, labels, input focus states, action buttons, and registration welcome panel.
+- Refined member workspace sidebar, top bar, data tables, form controls, focus states and responsive spacing without replacing existing account logic.
+
+Run `npm run check` to validate server and client JavaScript syntax. Run `npm start` to serve the site locally.
