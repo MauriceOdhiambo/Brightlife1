@@ -5573,3 +5573,8 @@ html.public-site-html, body.public-site-body { background:#f5f8fb !important; }
 @media(max-width:1150px){ .sb-header { align-items:center; } .sb-nav { gap:10px; } .sb-nav button { font-size:10px; } }
 @media(max-width:1050px){ .sb-header { padding:10px 22px; } .sb-nav { gap:0; } .sb-nav button { font-size:12px; } .sb-nav .sb-nav-login,.sb-nav .sb-nav-register { width:max-content; } }
 @media(max-width:680px){ .sb-header { padding:10px 16px; } .sb-brand { min-width:0; } .sb-brand small { max-width:190px; } .sb-hero { grid-template-columns:1fr; } .sb-hero-copy { padding:34px 22px; } .sb-hero-image { min-height:260px; } .sb-hero-image img { min-height:260px; max-height:340px; } .sb-focus-strip { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; } .sb-project-grid,.sb-project-grid-large { grid-template-columns:1fr; } .sb-card-image { height:210px; } .sb-values-grid { grid-template-columns:1fr; padding:0 18px 30px; } .sb-footer { grid-template-columns:1fr 1fr; } }
+
+/* Sitemap-aligned contact map panel */
+.sb-map-section{display:grid;grid-template-columns:minmax(230px,.72fr) minmax(0,1.6fr);gap:24px;align-items:stretch;padding:0 clamp(18px,4vw,64px) 42px;background:#fff}
+.sb-map-heading{align-self:center;padding:12px 0}.sb-map-heading h2{color:#073b70;font-size:clamp(23px,2.6vw,32px);margin:8px 0}.sb-map-heading p{color:#52667a;line-height:1.65}.sb-map-frame{min-height:300px;overflow:hidden;border-radius:14px;border:1px solid #dce8f1;box-shadow:0 10px 28px #0b376a12}.sb-map-frame iframe{display:block;width:100%;height:100%;min-height:300px;border:0}
+@media(max-width:700px){.sb-map-section{grid-template-columns:1fr;padding:0 18px 28px;gap:14px}.sb-map-frame,.sb-map-frame iframe{min-height:260px}}
