@@ -81,3 +81,26 @@ The application is available at `http://localhost:3000`. Use `npm run check` to 
 ### Deployment notes
 
 Deploy the repository to the existing hosting project with its required environment variables. Keep administrator credentials and service keys on the server only. Verify public pages, uploaded/published project content and the member workflows in the deployment environment before release.
+
+## Sitemap-aligned public website update
+
+The public presentation is rendered from `assets/app.js` and styled by `assets/app.css`. The sitemap-focused page set includes Home, About Us, Our Projects, Water Project detail, Governance, Partner With Us, Support Us / Donate, Contact, Savings & Loan Information, and the branded 404 state. The existing member login, registration, savings/loans dashboard and guarantor portal remain part of the application.
+
+### Image organization
+
+- Client-provided project photographs and the organization mark are stored in `assets/images/`.
+- Locally generated sitemap-style illustrative images are stored in `assets/images/generated/`.
+- Public page image references use local `/assets/images/...` paths and local fallback images. Administrator-published project photos can override defaults when a valid public image URL or local asset path is supplied.
+
+### Administrator-published project content
+
+The public project cards load the published content keys managed through the CBO content-management screen. Published titles, descriptions and photos update matching project cards; additional programme cards are appended when the administrator publishes content for supported extra programme keys.
+
+### Local development
+
+```bash
+npm install
+npm run dev
+```
+
+The server defaults to `http://localhost:3000`. Run `npm run check` to validate the server and browser JavaScript syntax.
