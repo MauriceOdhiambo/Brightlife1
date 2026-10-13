@@ -1,4 +1,4 @@
-# SND Brightlife CBO
+# SND Brightlife CB0
 
 Production Node.js web application for SND Brightlife CBO covering member services, savings, table banking, lending, repayments, guarantor approvals, administration, reporting and community programmes.
 
