@@ -1121,6 +1121,7 @@ function updateUserInfo(member) {
 
         function normalizePublicImageUrl(value){
             var url=String(value||'').trim();
+            if(/^\/(?!\/)[^\s]+$/.test(url)) return url;
             if(!/^https?:\/\//i.test(url)) return '';
             try{
                 var parsed=new URL(url);
@@ -1148,16 +1149,16 @@ function updateUserInfo(member) {
 
         
         var SND_PROJECT_DEFAULT_IMAGES={
-            water:'assets/images/water.jpg',
-            poultry:'assets/images/poultry.jpg',
-            agriculture:'assets/images/agriculture.jpg',
-            bike_skills:'assets/images/bike_skills.jpg',
-            education:'assets/images/education.jpg',
-            entrepreneurship:'assets/images/entrepreneurship.jpg',
-            women:'assets/images/women.jpg',
-            youth:'assets/images/youth.jpg',
-            community_development:'assets/images/community_development.jpg',
-            other:'assets/images/other.jpg'
+            water:'/assets/images/client-water-tank-activity-01.jpeg',
+            poultry:'/assets/images/client-poultry-01.jpeg',
+            agriculture:'/assets/images/client-poultry-07.jpeg',
+            bike_skills:'/assets/images/client-bike-repair-01.jpeg',
+            education:'/assets/images/client-bike-repair-02.jpeg',
+            entrepreneurship:'/assets/images/client-community-transport-03.jpeg',
+            women:'/assets/images/client-poultry-06.jpeg',
+            youth:'/assets/images/client-bike-repair-03.jpeg',
+            community_development:'/assets/images/client-community-transport-02.jpeg',
+            other:'/assets/images/client-community-transport-04.jpeg'
         };
         function projectImageUrl(map,key){
             var managed=publicContentImage(map,key);
@@ -1246,7 +1247,7 @@ function updateUserInfo(member) {
                 var active=activePage===key ? ' class="active" aria-current="page"' : '';
                 return '<button type="button"'+active+' onclick="closeBrightlifeInnerMenu();'+action+'">'+label+'</button>';
             }).join('');
-            return `<header class="bl-inner-header"><div class="bl-inner-head"><button type="button" class="bl-brand" onclick="closeBrightlifeInnerMenu();showPublicHome()" aria-label="SND Brightlife CBO Home"><img src="assets/images/snd-brightlife-mark.png" alt="SND Brightlife CBO"><span><strong>SND Brightlife CBO</strong><small>Empowering People. Building Livelihoods. Transforming Communities.</small></span></button><button type="button" class="bl-inner-menu-toggle" aria-label="Open website menu" aria-expanded="false" onclick="toggleBrightlifeInnerMenu(event)"><i class="fas fa-bars"></i><span>Menu</span></button><nav id="brightlifeInnerNav" aria-label="Website navigation">${nav}<button type="button" class="bl-login" onclick="closeBrightlifeInnerMenu();openMemberLogin()">Member Login</button></nav></div></header>`;
+            return `<header class="bl-inner-header"><div class="bl-inner-head"><button type="button" class="bl-brand" onclick="closeBrightlifeInnerMenu();showPublicHome()" aria-label="SND Brightlife CBO Home"><img src="/assets/images/snd-brightlife-mark.png" alt="SND Brightlife CBO"><span><strong>SND Brightlife CBO</strong><small>Empowering People. Building Livelihoods. Transforming Communities.</small></span></button><button type="button" class="bl-inner-menu-toggle" aria-label="Open website menu" aria-expanded="false" onclick="toggleBrightlifeInnerMenu(event)"><i class="fas fa-bars"></i><span>Menu</span></button><nav id="brightlifeInnerNav" aria-label="Website navigation">${nav}<button type="button" class="bl-login" onclick="closeBrightlifeInnerMenu();openMemberLogin()">Member Login</button></nav></div></header>`;
         }
 
         function loadPublicHomePage(){
@@ -1288,12 +1289,12 @@ function updateUserInfo(member) {
 
                         <section class="reference-focus-section" aria-labelledby="focus-title">
                             <div class="reference-focus-grid">
-                                <article class="reference-focus-card homepage-project-card" data-project-key="water" data-project-title="Water Supply" tabindex="0" role="button" aria-label="Open Clean Water and Sanitation project"><div class="reference-focus-icon water"><i class="fas fa-droplet"></i></div><h3>Clean Water &amp; Sanitation</h3><p>Healthy communities,<br>cleaner environments.</p><span class="homepage-project-link">View Project <i class="fas fa-arrow-right"></i></span></article>
-                                <article class="reference-focus-card homepage-project-card" data-project-key="education" data-project-title="Education Support" tabindex="0" role="button" aria-label="Open Education and Mentorship project"><div class="reference-focus-icon education"><i class="fas fa-book-open"></i></div><h3>Education &amp; Mentorship</h3><p>Knowledge builds<br>opportunities.</p><span class="homepage-project-link">View Project <i class="fas fa-arrow-right"></i></span></article>
-                                <article class="reference-focus-card homepage-project-card" data-project-key="agriculture" data-project-title="Agriculture &amp; Livelihoods" tabindex="0" role="button" aria-label="Open Agriculture and Poultry project"><div class="reference-focus-icon agriculture"><i class="fas fa-seedling"></i></div><h3>Agriculture &amp; Poultry</h3><p>Sustainable food,<br>lasting livelihoods.</p><span class="homepage-project-link">View Project <i class="fas fa-arrow-right"></i></span></article>
-                                <article class="reference-focus-card homepage-project-card" data-project-key="women" data-project-title="Women Empowerment" tabindex="0" role="button" aria-label="Open Women and Youth Empowerment project"><div class="reference-focus-icon women"><i class="fas fa-person-circle-plus"></i></div><h3>Women &amp; Youth Empowerment</h3><p>Stronger people,<br>stronger livelihoods.</p><span class="homepage-project-link">View Project <i class="fas fa-arrow-right"></i></span></article>
-                                <article class="reference-focus-card homepage-project-card" data-project-key="bike_skills" data-project-title="Bike Repair &amp; Vocational Skills" tabindex="0" role="button" aria-label="Open Skills and Employability project"><div class="reference-focus-icon skills"><i class="fas fa-gear"></i></div><h3>Skills &amp; Employability</h3><p>Practical skills for<br>a brighter future.</p><span class="homepage-project-link">View Project <i class="fas fa-arrow-right"></i></span></article>
-                                <article class="reference-focus-card homepage-project-card" data-project-key="entrepreneurship" data-project-title="Entrepreneurship &amp; Small Business" tabindex="0" role="button" aria-label="Open Entrepreneurship and Finance project"><div class="reference-focus-icon finance"><i class="fas fa-arrow-trend-up"></i></div><h3>Entrepreneurship &amp; Finance</h3><p>Ideas into income,<br>communities into wealth.</p><span class="homepage-project-link">View Project <i class="fas fa-arrow-right"></i></span></article>
+                                <article class="reference-focus-card homepage-project-card" data-project-key="water" data-project-title="Water Supply" tabindex="0" role="button" aria-label="Open Clean Water and Sanitation project" onclick="showSelectedProjectUpdatesPage('Water Supply','water')"><div class="reference-focus-icon water"><i class="fas fa-droplet"></i></div><h3>Clean Water &amp; Sanitation</h3><p>Healthy communities,<br>cleaner environments.</p></article>
+                                <article class="reference-focus-card homepage-project-card" data-project-key="education" data-project-title="Education Support" tabindex="0" role="button" aria-label="Open Education and Mentorship project" onclick="showSelectedProjectUpdatesPage('Education Support','education')"><div class="reference-focus-icon education"><i class="fas fa-book-open"></i></div><h3>Education &amp; Mentorship</h3><p>Knowledge builds<br>opportunities.</p></article>
+                                <article class="reference-focus-card homepage-project-card" data-project-key="agriculture" data-project-title="Agriculture &amp; Livelihoods" tabindex="0" role="button" aria-label="Open Agriculture and Poultry project" onclick="showSelectedProjectUpdatesPage('Agriculture & Livelihoods','agriculture')"><div class="reference-focus-icon agriculture"><i class="fas fa-seedling"></i></div><h3>Agriculture &amp; Poultry</h3><p>Sustainable food,<br>lasting livelihoods.</p></article>
+                                <article class="reference-focus-card homepage-project-card" data-project-key="women" data-project-title="Women Empowerment" tabindex="0" role="button" aria-label="Open Women and Youth Empowerment project" onclick="showSelectedProjectUpdatesPage('Women Empowerment','women')"><div class="reference-focus-icon women"><i class="fas fa-person-circle-plus"></i></div><h3>Women &amp; Youth Empowerment</h3><p>Stronger people,<br>stronger livelihoods.</p></article>
+                                <article class="reference-focus-card homepage-project-card" data-project-key="bike_skills" data-project-title="Bike Repair &amp; Vocational Skills" tabindex="0" role="button" aria-label="Open Skills and Employability project" onclick="showSelectedProjectUpdatesPage('Bike Repair & Vocational Skills','bike_skills')"><div class="reference-focus-icon skills"><i class="fas fa-gear"></i></div><h3>Skills &amp; Employability</h3><p>Practical skills for<br>a brighter future.</p></article>
+                                <article class="reference-focus-card homepage-project-card" data-project-key="entrepreneurship" data-project-title="Entrepreneurship &amp; Small Business" tabindex="0" role="button" aria-label="Open Entrepreneurship and Finance project" onclick="showSelectedProjectUpdatesPage('Entrepreneurship & Small Business','entrepreneurship')"><div class="reference-focus-icon finance"><i class="fas fa-arrow-trend-up"></i></div><h3>Entrepreneurship &amp; Finance</h3><p>Ideas into income,<br>communities into wealth.</p></article>
                             </div>
                         </section>
 
@@ -1304,7 +1305,7 @@ function updateUserInfo(member) {
                     </main>
 
                     <footer class="brightlife-home-footer reference-footer">
-                        <div class="reference-footer-brand"><img src="assets/images/snd-brightlife-mark.png" alt="SND Brightlife CBO"><div><strong>SND BRIGHTLIFE CBO</strong><span>Empowering People. Building Livelihoods.<br>Transforming Communities.</span></div></div>
+                        <div class="reference-footer-brand"><img src="/assets/images/snd-brightlife-mark.png" alt="SND Brightlife CBO"><div><strong>SND BRIGHTLIFE CBO</strong><span>Empowering People. Building Livelihoods.<br>Transforming Communities.</span></div></div>
                         <div class="reference-footer-links"><button onclick="showPublicHome()">Home</button><i>│</i><button onclick="showBrightlifeInnerPage('about')">About Us</button><i>│</i><button onclick="showBrightlifeInnerPage('programs')">Programmes</button><i>│</i><button onclick="showBrightlifeInnerPage('finance')">Financial Empowerment</button><i>│</i><button onclick="showBrightlifeInnerPage('membership')">Membership</button><i>│</i><button onclick="navigateTo('projects')">Projects</button><i>│</i><button onclick="showBrightlifeInnerPage('partner')">Partner With Us</button><i>│</i><button onclick="showBrightlifeInnerPage('contact')">Contact</button></div>
                         <div class="reference-footer-contact"><span><i class="fas fa-phone"></i> +254 711 765 739</span><span><i class="fas fa-envelope"></i> sndbrightlife@gmail.com</span><span><i class="fas fa-location-dot"></i> Kenya</span></div>
                         <div class="reference-footer-line"></div><b>SAVE&nbsp; • &nbsp;LEARN&nbsp; • &nbsp;BUILD&nbsp; • &nbsp;EMPOWER&nbsp; • &nbsp;GROW</b>
@@ -1312,29 +1313,20 @@ function updateUserInfo(member) {
                 </div>`;
             applyManagedHomepagePhotos();
 
-            // Homepage project cards: open the matching published project directly.
-            // This is intentionally scoped to the six homepage focus cards so the
-            // existing navigation and member-workspace project logic remain untouched.
+            // Homepage project cards navigate directly when the card itself is clicked.
+            // Keep keyboard activation for accessibility; no separate "View Project" control is used.
             body.querySelectorAll('.homepage-project-card[data-project-key]').forEach(function(card){
-                var openProject = function(){
-                    var key = card.getAttribute('data-project-key');
-                    var title = card.getAttribute('data-project-title');
-                    if (key && typeof showSelectedProjectUpdatesPage === 'function') {
-                        showSelectedProjectUpdatesPage(title || key, key);
-                    }
-                };
-                card.addEventListener('click', openProject);
                 card.addEventListener('keydown', function(event){
                     if (event.key === 'Enter' || event.key === ' ') {
                         event.preventDefault();
-                        openProject();
+                        card.click();
                     }
                 });
             });
 
             window.scrollTo({top:0,behavior:'auto'});
         }
-        if(!document.getElementById('brightlifeProjectCardStyles')){var st=document.createElement('style');st.id='brightlifeProjectCardStyles';st.textContent='.project-card{cursor:pointer;position:relative;transition:transform .18s ease,box-shadow .18s ease}.project-card:hover{transform:translateY(-3px)}.project-card:focus-visible{outline:3px solid rgba(108,60,225,.35);outline-offset:3px}.project-card-link{margin-top:13px;font-size:12px;font-weight:800;color:var(--primary);text-decoration:underline;text-underline-offset:3px;display:inline-block}.homepage-project-card{cursor:pointer;position:relative;transition:transform .18s ease,box-shadow .18s ease}.homepage-project-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(16,32,51,.12)}.homepage-project-card:focus-visible{outline:3px solid rgba(108,60,225,.35);outline-offset:3px}.homepage-project-link{display:inline-flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;color:#5b2bcf;font-size:12px;font-weight:800}.homepage-project-link i{font-size:10px}';document.head.appendChild(st);}
+        if(!document.getElementById('brightlifeProjectCardStyles')){var st=document.createElement('style');st.id='brightlifeProjectCardStyles';st.textContent='.project-card{cursor:pointer;position:relative;transition:transform .18s ease,box-shadow .18s ease}.project-card:hover{transform:translateY(-3px)}.project-card:focus-visible{outline:3px solid rgba(108,60,225,.35);outline-offset:3px}.project-card-link{margin-top:13px;font-size:12px;font-weight:800;color:var(--primary);text-decoration:underline;text-underline-offset:3px;display:inline-block}.homepage-project-card{cursor:pointer;position:relative;transition:transform .18s ease,box-shadow .18s ease}.homepage-project-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(16,32,51,.12)}.homepage-project-card:focus-visible{outline:3px solid rgba(108,60,225,.35);outline-offset:3px}.homepage-project-card:active{transform:translateY(-1px)}';document.head.appendChild(st);}
 
 if(!document.getElementById('brightlifeProjectsPublicHeaderStyles')){var st=document.createElement('style');st.id='brightlifeProjectsPublicHeaderStyles';st.textContent='#mainWrapper.public-projects-mode{padding:0!important;margin:0!important;width:100%!important;max-width:none!important}#mainWrapper.public-projects-mode #dashboard{display:block!important;margin:0!important;padding:0!important;background:transparent!important;border-radius:0!important;box-shadow:none!important}#mainWrapper.public-projects-mode #dashboardContent{padding:0!important;margin:0!important}#mainWrapper.public-projects-mode .public-projects-landing{min-height:100vh;width:100%;padding-top:0!important}#mainWrapper.public-projects-mode .public-projects-content{max-width:1200px;margin:0 auto;padding:44px 28px 70px!important}#mainWrapper.public-projects-mode .public-projects-heading{padding:26px 0 30px;text-align:left}#mainWrapper.public-projects-mode .public-projects-heading h1{margin:7px 0 10px;font-size:clamp(32px,4vw,48px);letter-spacing:-.03em;color:#102033}#mainWrapper.public-projects-mode .public-projects-heading p{max-width:780px;margin:0;color:#5b6b7e;line-height:1.75}@media(max-width:700px){#mainWrapper.public-projects-mode .public-projects-content{padding:30px 16px 50px!important}#mainWrapper.public-projects-mode .public-projects-heading{padding-top:20px}}';document.head.appendChild(st);}
         async function loadProjectsPage(){
@@ -1394,8 +1386,8 @@ if(!document.getElementById('brightlifeProjectsPublicHeaderStyles')){var st=docu
             const cards=document.getElementById('brightlifeProjectCards'); if(!cards)return;
             cards.innerHTML=projects.map(function(p){
                 var title=publicContentTitle(map,p[0],p[3]); var body=publicContentText(map,p[0],p[4]); var image=projectImageUrl(map,p[0]);
-                var imageHtml=image?`<div class="project-card-image"><img src="${String(image).replace(/"/g,'&quot;')}" alt="${escapeHtml(title)}"></div>`:`<div class="project-card-image"><div class="project-card-icon"><i class="fas ${p[2]}"></i></div></div>`;
-                return `<article class="brightlife-project-card">${imageHtml}<div class="project-card-body"><h3>${escapeHtml(title)}</h3><p>${escapeHtml(body)}</p><button type="button" class="project-view-btn" onclick="showSelectedProjectUpdatesPage('${p[3].replace(/'/g,"\\'")}','${p[0]}')">View Project <i class="fas fa-arrow-right"></i></button></div></article>`;
+                var imageHtml=image?`<div class="project-card-image"><img src="${String(image).replace(/"/g,'&quot;')}" alt="${escapeHtml(title)}" onerror="this.onerror=null;this.src='/assets/images/client-community-transport-01.jpeg'"></div>`:`<div class="project-card-image"><div class="project-card-icon"><i class="fas ${p[2]}"></i></div></div>`;
+                return `<article class="brightlife-project-card">${imageHtml}<div class="project-card-body"><h3>${escapeHtml(title)}</h3><p>${escapeHtml(body)}</p><button type="button" class="project-view-btn" onclick="showSelectedProjectUpdatesPage('${p[3].replace(/'/g,"'")}','${p[0]}')">View Project <i class="fas fa-arrow-right"></i></button></div></article>`;
             }).join('');
             window.scrollTo(0,0);
         }
@@ -1452,7 +1444,7 @@ if(!document.getElementById('brightlifeProjectsPublicHeaderStyles')){var st=docu
                     }
                     var d=r.updated_at?new Date(r.updated_at):null;
                     var dateLabel=d&&!isNaN(d.getTime())?d.toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'}):'Recently published';
-                    body.innerHTML='<article class="sp-card">'+(img?'<img src="'+String(img).replace(/"/g,'&quot;')+'" alt="'+escapeHtml(r.title||title)+'">':'')+'<div class="sp-body"><h2>'+escapeHtml(r.title||title)+'</h2><p>'+escapeHtml(r.body||'')+'</p><div class="sp-meta">Published update · '+escapeHtml(dateLabel)+'</div></div></article>';
+                    body.innerHTML='<article class="sp-card">'+(img?'<img src="'+String(img).replace(/"/g,'&quot;')+'" alt="'+escapeHtml(r.title||title)+'" onerror="this.onerror=null;this.src=\'/assets/images/client-community-transport-01.jpeg\'">':'')+'<div class="sp-body"><h2>'+escapeHtml(r.title||title)+'</h2><p>'+escapeHtml(r.body||'')+'</p><div class="sp-meta">Published update · '+escapeHtml(dateLabel)+'</div></div></article>';
                 }catch(e){
                     var b=document.getElementById('selectedProjectBody');
                     if(b)b.innerHTML='<div class="sp-empty"><i class="fas fa-circle-exclamation"></i><div style="font-weight:900;color:#243447;margin:10px 0 5px">Unable to load this project</div><div>'+escapeHtml(e.message||'Please try again.')+'</div></div>';
@@ -1461,16 +1453,49 @@ if(!document.getElementById('brightlifeProjectsPublicHeaderStyles')){var st=docu
             }
 
             // Public visitors continue to use the standalone project presentation.
-            if(landing) landing.style.display='none'; if(app) app.style.display='none'; if(dashboard) dashboard.style.display='none'; if(projectPage) projectPage.style.display='block';
-            if(sidebar) { sidebar.style.display='none'; sidebar.classList.remove('visible','open'); }
+            // Public project pages are standalone. Explicitly hide every auth/workspace
+            // surface before rendering the project so the login form can never appear
+            // underneath the project specification (especially after mobile navigation).
+            if(landing) landing.style.display='none';
+            if(app){ app.style.display='none'; app.setAttribute('aria-hidden','true'); }
+            if(dashboard){ dashboard.style.display='none'; dashboard.classList.remove('brightlife-public-mode'); }
+            if(projectPage){ projectPage.style.display='block'; projectPage.setAttribute('aria-hidden','false'); }
+            if(sidebar) { sidebar.style.display='none'; sidebar.classList.remove('visible','open'); sidebar.setAttribute('aria-hidden','true'); }
+            var publicOverlay=document.getElementById('sidebarOverlay');
+            if(publicOverlay){ publicOverlay.classList.remove('show'); publicOverlay.style.display='none'; }
+            var workspaceToggle=document.getElementById('mobileMenuToggle');
+            if(workspaceToggle){ workspaceToggle.style.display='none'; workspaceToggle.classList.add('hidden'); }
             if(mainWrapper && mainWrapper.classList){
-                mainWrapper.classList.add('public-site-mode');
-                mainWrapper.classList.remove('public-projects-mode','with-sidebar');
+                mainWrapper.classList.add('public-site-mode','public-project-active');
+                mainWrapper.classList.remove('public-projects-mode','with-sidebar','expanded');
+                mainWrapper.style.marginLeft='0';
+                mainWrapper.style.width='100%';
+                mainWrapper.style.maxWidth='100%';
+                mainWrapper.style.padding='0';
+                mainWrapper.style.boxSizing='border-box';
             }
             try{history.pushState({brightlife:'selected-project',page:'project-'+key},'', '#project-'+key);}catch(e){}
             if(!document.getElementById('brightlifeSelectedProjectStyles')){var st=document.createElement('style');st.id='brightlifeSelectedProjectStyles';st.textContent='.brightlife-selected-project{min-height:100vh;background:#f6f8fb;color:#102033}.brightlife-selected-project .sp-header{background:linear-gradient(135deg,#071426,#162b46);color:#fff;padding:28px 22px}.brightlife-selected-project .sp-inner{max-width:1050px;margin:0 auto}.brightlife-selected-project .sp-kicker{text-transform:uppercase;letter-spacing:.08em;font-size:10px;font-weight:900;opacity:.72}.brightlife-selected-project h1{font-size:clamp(28px,4vw,42px);margin:8px 0}.brightlife-selected-project .sp-content{max-width:1050px;margin:0 auto;padding:28px 22px 60px}.brightlife-selected-project .sp-card{background:#fff;border:1px solid #e4e9f0;border-radius:16px;overflow:hidden;box-shadow:0 8px 25px rgba(15,23,42,.06)}.brightlife-selected-project .sp-card img{width:100%;max-height:420px;object-fit:cover;display:block}.brightlife-selected-project .sp-body{padding:24px}.brightlife-selected-project .sp-body h2{margin:0 0 10px;font-size:22px}.brightlife-selected-project .sp-body p{margin:0;color:#526174;line-height:1.8;white-space:pre-line}.brightlife-selected-project .sp-meta{margin-top:18px;padding-top:12px;border-top:1px solid #edf1f5;color:#8995a4;font-size:11px;font-weight:800}.brightlife-selected-project .sp-empty{text-align:center;padding:55px 20px;color:#718096;background:#fff;border:1px dashed #d7e0e9;border-radius:16px}';document.head.appendChild(st);}
             projectPage.innerHTML='<div class="brightlife-selected-project">'+brightlifePublicHeader_('projects')+'<div class="sp-header"><div class="sp-inner"><div class="sp-kicker">SND Brightlife CBO · Published Updates</div><h1>'+escapeHtml(title)+'</h1><div style="opacity:.78;font-size:13px">Only published information for this selected project is shown.</div></div></div><div class="sp-content" id="selectedProjectBody"><div class="sp-empty"><i class="fas fa-spinner fa-spin"></i> Loading published updates…</div></div></div>';
-            try{var map=await getPublicContentMap([key]), r=map&&map[key], body=document.getElementById('selectedProjectBody'); if(!body)return; var img=projectImageUrl(map,key); if(!r || (!String(r.title||'').trim()&&!String(r.body||'').trim()&&!publicContentImage(map,key))){body.innerHTML='<div class="sp-empty"><i class="fas fa-bullhorn" style="font-size:28px;margin-bottom:12px"></i><div style="font-weight:900;color:#243447;margin-bottom:5px">No published updates yet</div><div>Approved updates for '+escapeHtml(title)+' will appear here when published by the administration.</div></div>';return;} var d=r.updated_at?new Date(r.updated_at):null, dateLabel=d&&!isNaN(d.getTime())?d.toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'}):'Recently published'; body.innerHTML='<article class="sp-card">'+(img?'<img src="'+String(img).replace(/"/g,'&quot;')+'" alt="'+escapeHtml(r.title||title)+'">':'')+'<div class="sp-body"><h2>'+escapeHtml(r.title||title)+'</h2><p>'+escapeHtml(r.body||'')+'</p><div class="sp-meta">Published update · '+escapeHtml(dateLabel)+'</div></div></article>';}catch(e){var b=document.getElementById('selectedProjectBody');if(b)b.innerHTML='<div class="sp-empty"><i class="fas fa-circle-exclamation" style="font-size:28px;margin-bottom:12px"></i><div style="font-weight:900;color:#243447;margin-bottom:5px">Unable to load this project</div><div>'+escapeHtml(e.message||'Please try again.')+'</div></div>';}
+            try{
+                var map=await getPublicContentMap([key]), r=map&&map[key], body=document.getElementById('selectedProjectBody');
+                if(!body)return;
+                var defaults={
+                    water:'Community water activities include water storage, collection and local infrastructure priorities, with continued attention to safe handling, reliable access and sustainable management.',
+                    poultry:'Poultry activities support practical husbandry skills, household food security, animal care and opportunities to strengthen local livelihoods.',
+                    agriculture:'Agriculture and livelihood activities focus on practical food production, smallholder resilience, responsible use of resources and household income opportunities.',
+                    bike_skills:'Vocational activities include hands-on repair skills, equipment care, workshop safety, customer service and practical knowledge that can support self-employment.',
+                    education:'Education and skills activities support learning, mentorship, practical capacity building and opportunities for young people and community members.',
+                    entrepreneurship:'Enterprise activities focus on business skills, planning, budgeting, customer service and practical approaches to sustainable income generation.',
+                    women:'Women-focused community activities support participation, practical skills, wellbeing, livelihood opportunities and stronger roles in local decision-making.',
+                    youth:'Youth activities focus on practical skills, mentorship, vocational learning, enterprise and constructive participation in community life.',
+                    community_development:'Community development activities bring residents together around local priorities, practical solutions, shared responsibility and sustainable improvement.',
+                    other:'This programme area brings together additional community priorities and activities as they are documented and shared.'
+                };
+                var heading=String(r&&r.title||title), description=String(r&&r.body||defaults[key]||'Community activities are shaped by local priorities and practical opportunities.'), image=projectImageUrl(map,key);
+                var d=r&&r.updated_at?new Date(r.updated_at):null, dateLabel=d&&!isNaN(d.getTime())?d.toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'}):'Programme overview';
+                body.innerHTML='<article class="sp-card">'+(image?'<img src="'+String(image).replace(/"/g,'&quot;')+'" alt="'+escapeHtml(heading)+'" onerror="this.onerror=null;this.src=\'/assets/images/client-community-transport-01.jpeg\'">':'')+'<div class="sp-body"><h2>'+escapeHtml(heading)+'</h2><p>'+escapeHtml(description)+'</p><div class="sp-meta">'+(r&&r.updated_at?'Published update · ':'SND Brightlife CBO · ')+escapeHtml(dateLabel)+'</div></div></article>';
+            }catch(e){var b=document.getElementById('selectedProjectBody');if(b)b.innerHTML='<div class="sp-empty"><i class="fas fa-circle-exclamation" style="font-size:28px;margin-bottom:12px"></i><div style="font-weight:900;color:#243447;margin-bottom:5px">Unable to load this project</div><div>'+escapeHtml(e.message||'Please try again.')+'</div></div>';}
         }
 
         async function loadTrainingsPage(){
@@ -5889,13 +5914,20 @@ html+=`<div class="section-card" id="reportFilters"><div class="section-title"><
             var secureRouteMap={dashboard:1,savings:1,loans:1,loanmanagement:1,guarantors:1,repayments:1,transactions:1,reports:1,profile:1,messages:1,settings:1,contentmanagement:1,adminsettings:1,admin:1,members:1,alltransactions:1,executive:1,chat:1,rights:1};
             if(h==='member-login'){ openMemberLogin(false); return; }
             if(h==='member-registration'){ openMemberRegistration(false); return; }
-            if(['about','programs','approach','finance','membership','projects','partner','contact'].indexOf(h)>=0){ showBrightlifeInnerPage(h,false); return; }
+            var sitemapRoutes=['home','about','projects','water','governance','partner','donate','contact','terms','404','notfound'];
+            if(sitemapRoutes.indexOf(h)>=0){ if(typeof renderSitemapPage==='function') renderSitemapPage(h,false); else showPublicHome(false); return; }
+            if(['programs','approach','finance','membership'].indexOf(h)>=0){ showBrightlifeInnerPage(h,false); return; }
             if(secureRouteMap[h]){ if(getCanonicalMemberId()) navigateTo(h); else openMemberLogin(false); return; }
             if(h.indexOf('project-')===0 || h==='trainings'){ if(getCanonicalMemberId() || h==='trainings') navigateTo(h); else showPublicHome(false); return; }
             if(h==='home'||!h){ showPublicHome(false); }
         });
 
         function showPublicHome(pushHistory) {
+            // The public CBO website follows the approved sitemap; member workflows remain in the existing portal.
+            if (typeof renderSitemapPage === 'function') {
+                renderSitemapPage('home', pushHistory === false ? false : true);
+                return;
+            }
             try {
                 if (location.hash !== '#home') {
                     if (pushHistory === false) history.replaceState({brightlife:'public-home'}, '', '#home');
@@ -5903,7 +5935,7 @@ html+=`<div class="section-card" id="reportFilters"><div class="section-title"><
                 }
             } catch(e) {}
             var mainWrapper=document.getElementById('mainWrapper');
-            if(mainWrapper && mainWrapper.classList) mainWrapper.classList.add('public-site-mode');
+            if(mainWrapper && mainWrapper.classList){ mainWrapper.classList.remove('public-project-active'); mainWrapper.classList.add('public-site-mode'); }
             var publicHome = document.getElementById('publicHomeLanding');
             var projectPage = document.getElementById('publicProjectPage');
             var auth = document.getElementById('app');
@@ -5935,14 +5967,52 @@ html+=`<div class="section-card" id="reportFilters"><div class="section-title"><
 
         function openMemberLogin(pushHistory) {
             if(pushHistory !== false){ try { history.pushState({brightlife:'login'}, '', '#member-login'); } catch(e) {} }
+
+            // LOGIN IS A STANDALONE PUBLIC SCREEN.
+            // A selected project is rendered in #publicProjectPage, which is a
+            // sibling of the login container. Explicitly clear that project state
+            // before showing Member Login so the login form can never remain below
+            // the project specification.
+            var mainWrapper=document.getElementById('mainWrapper');
+            var publicHome=document.getElementById('publicHomeLanding');
+            var projectPage=document.getElementById('publicProjectPage');
+            var dashboard=document.getElementById('dashboard');
+            var sidebar=document.getElementById('sidebar');
+            var sidebarOverlay=document.getElementById('sidebarOverlay');
+            var mobileMenuToggle=document.getElementById('mobileMenuToggle');
+            var memberTopbar=document.getElementById('memberTopbar');
+            var auth=document.getElementById('app');
+
             document.body.classList.remove('public-site-body','workspace-active');
             document.documentElement.classList.remove('public-site-html');
-            var mainWrapper=document.getElementById('mainWrapper');
-            if(mainWrapper && mainWrapper.classList) mainWrapper.classList.remove('public-site-mode');
-            var publicHome = document.getElementById('publicHomeLanding');
-            var auth = document.getElementById('app');
-            if (publicHome) publicHome.style.display = 'none';
-            if (auth) { auth.style.display = 'block'; auth.classList.remove('registration-mode'); }
+
+            if(projectPage){
+                projectPage.style.display='none';
+                projectPage.innerHTML='';
+                projectPage.setAttribute('aria-hidden','true');
+            }
+            if(publicHome) publicHome.style.display='none';
+            if(dashboard){ dashboard.style.display='none'; dashboard.classList.remove('brightlife-public-mode'); }
+            if(sidebar){ sidebar.style.display='none'; sidebar.classList.remove('visible','open'); sidebar.setAttribute('aria-hidden','true'); }
+            if(sidebarOverlay){ sidebarOverlay.classList.remove('show'); sidebarOverlay.style.display='none'; }
+            if(mobileMenuToggle){ mobileMenuToggle.style.display='none'; mobileMenuToggle.classList.add('hidden'); }
+            if(memberTopbar){ memberTopbar.style.display='none'; memberTopbar.setAttribute('aria-hidden','true'); }
+
+            if(mainWrapper && mainWrapper.classList){
+                mainWrapper.classList.remove('public-project-active','with-sidebar','expanded');
+                mainWrapper.classList.add('public-site-mode');
+                mainWrapper.style.marginLeft='0';
+                mainWrapper.style.width='100%';
+                mainWrapper.style.maxWidth='100%';
+                mainWrapper.style.padding='0';
+                mainWrapper.style.boxSizing='border-box';
+            }
+
+            if(auth){
+                auth.style.display='block';
+                auth.classList.remove('registration-mode');
+                auth.setAttribute('aria-hidden','false');
+            }
             showTab('login');
             window.scrollTo(0, 0);
         }
@@ -5952,7 +6022,7 @@ html+=`<div class="section-card" id="reportFilters"><div class="section-title"><
             document.body.classList.remove('public-site-body','workspace-active');
             document.documentElement.classList.remove('public-site-html');
             var mainWrapper=document.getElementById('mainWrapper');
-            if(mainWrapper && mainWrapper.classList) mainWrapper.classList.remove('public-site-mode');
+            if(mainWrapper && mainWrapper.classList) mainWrapper.classList.remove('public-site-mode','public-project-active');
             var publicHome = document.getElementById('publicHomeLanding');
             var auth = document.getElementById('app');
             if (publicHome) publicHome.style.display = 'none';
@@ -6028,7 +6098,7 @@ html+=`<div class="section-card" id="reportFilters"><div class="section-title"><
             var innerTopbar=document.getElementById('memberTopbar');
             if(innerSidebar){ innerSidebar.style.display='none'; innerSidebar.classList.remove('visible','open'); innerSidebar.setAttribute('aria-hidden','true'); }
             if(innerTopbar){ innerTopbar.style.display='none'; innerTopbar.setAttribute('aria-hidden','true'); }
-            if(mainWrapper&&mainWrapper.classList)mainWrapper.classList.add('public-site-mode');
+            if(mainWrapper&&mainWrapper.classList){mainWrapper.classList.remove('public-project-active');mainWrapper.classList.add('public-site-mode');}
 
             var pages={
                 about:{eyebrow:'ABOUT SND BRIGHTLIFE',title:'Community-led solutions for sustainable development',lead:'We work with people and communities to strengthen skills, livelihoods, financial resilience, opportunity and local ownership.',sections:[
@@ -6083,143 +6153,86 @@ html+=`<div class="section-card" id="reportFilters"><div class="section-title"><
         }
 
         function renderPublicHomeLanding() {
+            renderSitemapPage('home');
+        }
+
+        function renderSitemapPage(page, pushHistory) {
             var el = document.getElementById('publicHomeContent');
             if (!el) return;
-            el.innerHTML = `
-                <div class="brightlife-public-page" id="brightlife-public-page">
-                    <header class="public-main-header">
-                        <div class="public-header-inner">
-                            <button type="button" class="public-brand" onclick="scrollPublicSection('public-home','home')" aria-label="SND Brightlife CBO Home">
-                                <img src="assets/images/snd-brightlife-mark.png" alt="SND Brightlife CBO">
-                                <span><strong>SND Brightlife CBO</strong><small>Community - Led Solutions for Sustainable Development</small></span>
-                            </button>
-                            <nav class="public-main-nav" aria-label="Main navigation">
-                                <button type="button" class="public-main-link active" data-public-nav="home" onclick="scrollPublicSection('public-home','home')">Home</button>
-                                <a class="public-main-link" data-public-nav="approach" href="#approach" onclick="event.preventDefault();showBrightlifeInnerPage('approach')">Our Approach</a>
-                                <div class="public-nav-group">
-                                    <button type="button" class="public-main-link public-nav-group-trigger" aria-haspopup="true" aria-expanded="false" onclick="togglePublicDropdown(this)">Discover <i class="fas fa-chevron-down"></i></button>
-                                    <div class="public-nav-dropdown" role="menu">
-                                        <a role="menuitem" href="#about" onclick="event.preventDefault();showBrightlifeInnerPage('about')">About Us</a>
-                                        <a role="menuitem" href="#programs" onclick="event.preventDefault();showBrightlifeInnerPage('programs')">Our Programmes</a>
-                                        <a role="menuitem" href="#projects" onclick="event.preventDefault();showBrightlifeInnerPage('projects')">Projects</a>
-                                    </div>
-                                </div>
-                                <div class="public-nav-group">
-                                    <button type="button" class="public-main-link public-nav-group-trigger" aria-haspopup="true" aria-expanded="false" onclick="togglePublicDropdown(this)">Member Services <i class="fas fa-chevron-down"></i></button>
-                                    <div class="public-nav-dropdown" role="menu">
-                                        <a role="menuitem" href="#finance" onclick="event.preventDefault();showBrightlifeInnerPage('finance')">Financial Empowerment</a>
-                                        <a role="menuitem" href="#membership" onclick="event.preventDefault();showBrightlifeInnerPage('membership')">Membership</a>
-                                    </div>
-                                </div>
-                                <div class="public-nav-group">
-                                    <button type="button" class="public-main-link public-nav-group-trigger" aria-haspopup="true" aria-expanded="false" onclick="togglePublicDropdown(this)">Connect <i class="fas fa-chevron-down"></i></button>
-                                    <div class="public-nav-dropdown" role="menu">
-                                        <a role="menuitem" href="#partner" onclick="event.preventDefault();showBrightlifeInnerPage('partner')">Partner With Us</a>
-                                        <a role="menuitem" href="#contact" onclick="event.preventDefault();showBrightlifeInnerPage('contact')">Contact Us</a>
-                                    </div>
-                                </div>
-                                <a class="public-login-button" href="index.html?member=login">Member Login</a>
-                            </nav>
-                        </div>
-                    </header>
-
-                    <main id="public-home" class="public-main-content">
-                        <section class="public-hero-section public-anchor" id="public-hero">
-                            <div class="public-hero-copy">
-                                <div class="public-kicker">SND BRIGHTLIFE CBO</div>
-                                <h1>Empowering People. Building Livelihoods. Transforming Communities.</h1>
-                                <p class="public-lead"><strong>Welcome to SND Brightlife Community Based Organization (CBO)</strong> — a community-led organization working to strengthen livelihoods, skills, opportunity and community wellbeing.</p>
-                                <p>Our work brings together <strong>clean water, education, skills development, agriculture, entrepreneurship, financial literacy, women and youth empowerment, and community development</strong>.</p>
-                                <div class="public-hero-actions">
-                                    <button class="public-btn public-btn-primary" onclick="scrollPublicSection('public-programs','programs')"><i class="fas fa-layer-group"></i> Explore Our Programs</button>
-                                    <button class="public-btn public-btn-light" onclick="openMemberRegistration()"><i class="fas fa-user-plus"></i> Become a Member</button>
-                                </div>
-                            </div>
-                            <div class="public-hero-panel">
-                                <span class="public-panel-kicker">OUR APPROACH</span>
-                                <h2>Save. Learn. Build. Empower. Grow.</h2>
-                                <p>We connect financial discipline with practical skills, enterprise opportunities and community-led development so that members and communities can build stronger futures.</p>
-                                <div class="public-panel-points"><span><i class="fas fa-check-circle"></i> Community driven</span><span><i class="fas fa-check-circle"></i> Opportunity focused</span><span><i class="fas fa-check-circle"></i> Responsible growth</span></div>
-                            </div>
-                        </section>
-
-                        <section id="public-about" class="public-section public-section-light public-anchor">
-                            <div class="public-section-heading"><span class="public-kicker">ABOUT US</span><h2>Community empowerment with practical livelihood solutions.</h2><p>SND Brightlife CBO focuses on social and economic wellbeing by combining community empowerment, financial inclusion and practical livelihood programmes.</p></div>
-                            <div class="public-about-grid">
-                                <article class="public-card public-about-main"><div class="public-icon"><i class="fas fa-people-group"></i></div><h3>Who We Are</h3><p>SND Brightlife CBO is a community-based organization focused on improving the social and economic wellbeing of individuals, families and communities.</p><p>Our approach brings together savings and responsible member financing with clean water, education, vocational skills, agriculture, entrepreneurship, women and youth empowerment and community development.</p><p>Through our programmes, we aim to help people move from dependency to opportunity, from ideas to sustainable livelihoods and from small beginnings to brighter futures.</p></article>
-                                <div class="public-value-stack"><article class="public-card"><div class="public-icon"><i class="fas fa-eye"></i></div><h3>Our Vision</h3><p>To build empowered, healthy, financially resilient and self-reliant communities where everyone has an opportunity to improve their livelihood and create a brighter future.</p></article><article class="public-card"><div class="public-icon"><i class="fas fa-bullseye"></i></div><h3>Our Mission</h3><p>To empower individuals and communities through financial inclusion, clean water, education, skills development, sustainable agriculture, entrepreneurship and community-driven programmes that create lasting social and economic opportunities.</p></article></div>
-                            </div>
-                        </section>
-
-                        <section id="public-approach" class="public-section public-section-light public-anchor">
-                            <div class="public-section-heading"><span class="public-kicker">OUR APPROACH</span><h2>Community-led development with practical pathways.</h2><p>Brightlife's approach is grounded in listening to communities, building practical capacity and connecting people to opportunities that can strengthen livelihoods.</p></div>
-                            <div class="public-trust-grid">
-                                <article class="public-card"><div class="public-icon"><i class="fas fa-comments"></i></div><h3>Listen</h3><p>Understand community needs, priorities, aspirations and local opportunities.</p></article>
-                                <article class="public-card"><div class="public-icon"><i class="fas fa-graduation-cap"></i></div><h3>Learn</h3><p>Promote practical learning, mentorship, financial literacy and market-relevant skills.</p></article>
-                                <article class="public-card"><div class="public-icon"><i class="fas fa-hammer"></i></div><h3>Build</h3><p>Support people to turn skills, savings, ideas and opportunities into livelihoods and enterprises.</p></article>
-                                <article class="public-card public-growing-card"><div class="public-icon"><i class="fas fa-people-group"></i></div><h3>Grow Together</h3><p>Strengthen local ownership, responsible participation and opportunities that can benefit others.</p></article>
-                            </div>
-                        </section>
-
-                        <section id="public-programs" class="public-section public-section-tinted public-anchor">
-                            <div class="public-section-heading"><span class="public-kicker">OUR PROGRAMS</span><h2>Practical programmes that create opportunity.</h2><p>Brightlife does more than provide financial services. Our programmes are designed to strengthen livelihoods, skills, wellbeing and community resilience.</p></div>
-                            <div class="public-program-grid">
-                                <article class="public-card public-program-card"><div class="public-icon"><i class="fas fa-droplet"></i></div><h3>Clean Water Treatment &amp; Vending</h3><p>Providing communities with access to safe, affordable drinking water while promoting sanitation, hygiene and sustainable water solutions.</p></article>
-                                <article class="public-card public-program-card"><div class="public-icon"><i class="fas fa-bicycle"></i></div><h3>Bike Repair &amp; Vocational Skills</h3><p>Equipping young people with practical bicycle and motorcycle repair skills that can lead to employment, self-employment and small-business opportunities.</p></article>
-                                <article class="public-card public-program-card"><div class="public-icon"><i class="fas fa-dove"></i></div><h3>Poultry Farming &amp; Agriculture</h3><p>Supporting poultry and agricultural initiatives that improve food security, household income, entrepreneurship and sustainable livelihoods.</p></article>
-                                <article class="public-card public-program-card"><div class="public-icon"><i class="fas fa-graduation-cap"></i></div><h3>Education Support</h3><p>Supporting learning, mentorship, vocational training, digital skills and educational opportunities for children and young people.</p></article>
-                                <article class="public-card public-program-card"><div class="public-icon"><i class="fas fa-venus"></i></div><h3>Women Empowerment</h3><p>Helping women strengthen their economic independence through skills, savings, entrepreneurship, agriculture and community leadership.</p></article>
-                                <article class="public-card public-program-card"><div class="public-icon"><i class="fas fa-users"></i></div><h3>Youth Empowerment</h3><p>Connecting young people with skills, mentorship, entrepreneurship, agriculture, technology and income-generating opportunities.</p></article>
-                                <article class="public-card public-program-card"><div class="public-icon"><i class="fas fa-store"></i></div><h3>Entrepreneurship &amp; Small Business</h3><p>Encouraging viable enterprises through practical skills, financial knowledge, business discipline and community-based support.</p></article>
-                                <article class="public-card public-program-card"><div class="public-icon"><i class="fas fa-chart-line"></i></div><h3>Financial Literacy</h3><p>Practical education covering saving, budgeting, responsible borrowing, debt management, record keeping and business planning.</p></article>
-                                <article class="public-card public-program-card"><div class="public-icon"><i class="fas fa-people-roof"></i></div><h3>Community Development</h3><p>Community participation in clean water, education, agriculture, skills training, environmental conservation, health awareness, youth, women and welfare initiatives.</p></article>
-                            </div>
-                            <div class="public-project-cta" style="margin-top:24px;"><div><span class="public-kicker">DETAILED PROGRAMME INFORMATION</span><h3>Explore programme pages and published project updates.</h3><p>Go beyond the homepage to see the purpose, activities and approved updates for each programme area.</p></div><button class="public-btn public-btn-primary" onclick="navigateTo('projects')">Explore Our Programmes <i class="fas fa-arrow-right"></i></button></div>
-                        </section>
-
-                        <section id="public-save-borrow" class="public-section public-section-light public-anchor">
-                            <div class="public-section-heading"><span class="public-kicker">SAVE &amp; BORROW</span><h2>Members’ Table Banking &amp; Revolving Fund</h2><p>Our Members’ Table Banking &amp; Revolving Fund encourages members to save consistently, build financial discipline, and access responsible short-term financing based on their savings, repayment history, guarantors, and Fund rules.</p></div>
-                            <div class="public-finance-grid">
-                                <article class="public-card public-finance-card"><div class="public-icon"><i class="fas fa-piggy-bank"></i></div><h3>Save With Us</h3><p>Build a consistent savings habit, strengthen your financial security, and grow your future borrowing capacity.</p><button class="public-inline-link" onclick="openMemberLogin()">Start Saving <i class="fas fa-arrow-right"></i></button></article>
-                                <article class="public-card public-finance-card"><div class="public-icon"><i class="fas fa-hand-holding-dollar"></i></div><h3>Borrow Responsibly</h3><p>Eligible members can access loans based on savings, membership history, repayment performance, guarantors, and available funds.</p><button class="public-inline-link" onclick="openMemberLogin()">Apply as a Member <i class="fas fa-arrow-right"></i></button></article>
-                                <article class="public-card public-finance-card"><div class="public-icon"><i class="fas fa-bolt"></i></div><h3>Emergency Loan</h3><p>Short-term support for eligible members facing genuine urgent needs, subject to the Fund’s terms, verification, approval and availability of funds.</p><button class="public-inline-link" onclick="showPublicLoanTerms()">View Loan Terms <i class="fas fa-arrow-right"></i></button></article>
-                            </div>
-                            <div class="public-responsible-note"><div><strong>Responsible member finance</strong><span>Loan decisions remain subject to eligibility, Fund rules, approval requirements and availability of funds.</span></div><button class="public-btn public-btn-outline" onclick="showPublicLoanTerms()">View Loan Terms</button></div>
-                        </section>
-
-                        <section id="public-projects" class="public-section public-section-dark public-anchor">
-                            <div class="public-section-heading public-heading-light"><span class="public-kicker">PROJECTS &amp; COMMUNITY IMPACT</span><h2>Turning community needs into practical opportunities.</h2><p>Brightlife combines financial inclusion with projects that can improve livelihoods, skills, wellbeing and community resilience.</p></div>
-                            <div class="public-impact-grid"><article><i class="fas fa-faucet-drip"></i><strong>Clean Water</strong><span>Safe water, hygiene and sustainable water solutions.</span></article><article><i class="fas fa-seedling"></i><strong>Agriculture</strong><span>Poultry, farming and livelihood opportunities.</span></article><article><i class="fas fa-screwdriver-wrench"></i><strong>Skills</strong><span>Vocational and practical income-generating skills.</span></article><article><i class="fas fa-graduation-cap"></i><strong>Education</strong><span>Learning, mentorship, digital and life skills.</span></article></div>
-                            <div class="public-project-cta"><div><span class="public-kicker">EXPLORE OUR WORK</span><h3>See programmes, project updates and community activities.</h3><p>Explore Brightlife's community programmes, projects and practical initiatives designed to create opportunity and improve livelihoods.</p></div><button class="public-btn public-btn-light" onclick="navigateTo('projects')">View Projects</button></div>
-                        </section>
-
-                        <section class="public-section public-section-light public-anchor" id="public-trust">
-                            <div class="public-section-heading"><span class="public-kicker">WHY BRIGHTLIFE?</span><h2>Built on trust, opportunity and community.</h2><p>Our goal is not simply to lend money, but to help members and communities become more self-reliant.</p></div>
-                            <div class="public-trust-grid"><article class="public-card"><div class="public-icon"><i class="fas fa-people-group"></i></div><h3>Community Driven</h3><p>Built around the needs and aspirations of our members and communities.</p></article><article class="public-card"><div class="public-icon"><i class="fas fa-shield-halved"></i></div><h3>Transparent &amp; Accountable</h3><p>Member savings, loans and repayments are properly recorded and managed.</p></article><article class="public-card"><div class="public-icon"><i class="fas fa-lightbulb"></i></div><h3>Opportunity Focused</h3><p>We combine financial support with skills, enterprise and practical livelihood programs.</p></article><article class="public-card public-growing-card"><div class="public-icon"><i class="fas fa-seedling"></i></div><h3>Growing Together</h3><p>We help members and communities build skills, confidence and practical pathways toward greater self-reliance.</p></article></div>
-                        </section>
-
-                        <section id="public-membership" class="public-section public-section-tinted public-anchor">
-                            <div class="public-membership-card"><div><span class="public-kicker">MEMBERSHIP</span><h2>Join SND Brightlife CBO</h2><h3>Be Part of Something That Grows With You</h3><p>Membership in SND Brightlife CBO provides an opportunity to become part of a community focused on <strong>saving, learning, entrepreneurship, empowerment, and responsible growth.</strong></p><p>Membership may provide access to eligible CBO programmes and the Members' Table Banking &amp; Revolving Fund, subject to applicable membership requirements and programme rules.</p></div><div class="public-membership-actions"><button class="public-btn public-btn-primary" onclick="openMemberRegistration()"><i class="fas fa-user-plus"></i> Join SND Brightlife CBO</button><button class="public-btn public-btn-outline" onclick="openMemberLogin()"><i class="fas fa-id-card"></i> Member Login</button><span>Basic requirements are provided on the Membership page and include registration, identification and account-opening requirements.</span></div></div>
-                        </section>
-
-                        <section id="public-partner" class="public-section public-section-dark public-anchor">
-                            <div class="public-partner-card"><div><span class="public-kicker">PARTNER WITH US</span><h2>Let’s Build Brighter Communities Together</h2><p>SND Brightlife CBO welcomes partnerships that can help expand the impact of our programmes in clean water, education, vocational training, agriculture, entrepreneurship, financial literacy, women and youth empowerment, environmental sustainability and community development.</p></div><div class="public-partner-actions"><button class="public-btn public-btn-light" onclick="scrollPublicSection('public-contact','contact')"><i class="fas fa-handshake"></i> Partner With Us</button><button class="public-btn public-btn-transparent" onclick="scrollPublicSection('public-contact','contact')"><i class="fas fa-envelope"></i> Get In Touch</button></div></div>
-                        </section>
-
-                        <section id="public-contact" class="public-section public-section-light public-anchor">
-                            <div class="public-section-heading"><span class="public-kicker">CONTACT US</span><h2>Connect with SND Brightlife CBO.</h2><p>For community programmes, partnerships, training activities and member support, please use our official contact channels.</p></div>
-                            <div class="public-contact-panel">
-                                <div class="public-contact-grid"><a class="public-contact-card" href="tel:+254711765739"><span class="public-contact-icon"><i class="fab fa-whatsapp"></i></span><span><strong>Phone / WhatsApp</strong><b>+254711765739</b><small>General enquiries and member support.</small></span></a><a class="public-contact-card" href="mailto:sndbrightlife@gmail.com"><span class="public-contact-icon"><i class="fas fa-envelope"></i></span><span><strong>Email</strong><b>sndbrightlife@gmail.com</b><small>Programmes, partnerships and general enquiries.</small></span></a><a class="public-contact-card" href="https://maps.app.goo.gl/nVSWYUMQT6gNao2X7" target="_blank" rel="noopener"><span class="public-contact-icon"><i class="fas fa-location-dot"></i></span><span><strong>Location</strong><b>View our office location</b><small>Open the official map location and plan your visit.</small></span></a><div class="public-contact-card"><span class="public-contact-icon"><i class="fas fa-clock"></i></span><span><strong>Operating Hours</strong><b>07:00 – 18:00</b><small>Member support, enquiries and office services.</small></span></div></div>
-                            </div>
-                            <div class="public-contact-actions"><button class="public-btn public-btn-primary" onclick="openMemberRegistration()"><i class="fas fa-user-plus"></i> Become a Member</button><button class="public-btn public-btn-outline" onclick="openMemberLogin()"><i class="fas fa-file-signature"></i> Apply for a Loan</button><button class="public-btn public-btn-outline" onclick="scrollPublicSection('public-partner','partner')"><i class="fas fa-handshake"></i> Partner With Us</button><button class="public-btn public-btn-outline" onclick="scrollPublicSection('public-contact','contact')"><i class="fas fa-phone"></i> Contact Us</button></div>
-                        </section>
-                    </main>
-
-                    <footer class="public-main-footer"><div class="public-footer-brand"><strong>SND Brightlife CBO</strong><span>Members’ Table Banking &amp; Revolving Fund</span></div><div class="public-footer-links"><button onclick="scrollPublicSection('public-home','home')">Home</button><button onclick="showBrightlifeInnerPage('about')">About Us</button><button onclick="showBrightlifeInnerPage('programs')">Our Programmes</button><button onclick="showBrightlifeInnerPage('finance')">Financial Empowerment</button><button onclick="showBrightlifeInnerPage('membership')">Membership</button><button onclick="showBrightlifeInnerPage('projects')">Projects</button><button onclick="showBrightlifeInnerPage('partner')">Partner With Us</button><button onclick="showBrightlifeInnerPage('contact')">Contact Us</button></div><p>Loans and financial services are available only to eligible members and are subject to the Fund’s rules, approval requirements and availability of funds.</p><span class="public-footer-copy">Empowering People. Building Livelihoods. Transforming Communities.</span></footer>
-                </div>`;
-            applyManagedHomepagePhotos();
+            var img = function(name, alt, cls) {
+                return '<img class="'+(cls||'')+'" src="/assets/images/'+name+'" alt="'+alt.replace(/"/g,'&quot;')+'" loading="lazy" onerror="this.onerror=null;this.src=\'/assets/images/client-community-transport-01.jpeg\'">';
+            };
+            var projectCards = [
+                ['client-water-tank-activity-01.jpeg','Water Project','Clean water access, safe storage and community-led water infrastructure.','water','water'],
+                ['client-bike-repair-02.jpeg','Education & Skills','Learning opportunities, practical skills and capacity building.','projects','education'],
+                ['client-poultry-06.jpeg','Women & Wellbeing','Inclusive opportunities that support dignity, wellbeing and livelihoods.','projects','women'],
+                ['client-poultry-07.jpeg','Agriculture & Food Security','Smallholder livelihoods, food production and resilient household income.','projects','agriculture'],
+                ['client-community-transport-01.jpeg','Community Development','Locally driven action shaped around community priorities.','projects','community_development'],
+                ['client-poultry-01.jpeg','Poultry Project','Poultry activities supporting food security, practical skills and income.','projects','poultry']
+            ];
+            var cards = projectCards.map(function(p){
+                var action = p[4] === 'water' ? "renderSitemapPage('water')" : 'showSelectedProjectUpdatesPage('+JSON.stringify(p[1])+','+JSON.stringify(p[4])+')';
+                return '<article class="sb-project-card" data-project-key="'+p[4]+'">'+img(p[0],p[1],'sb-card-image')+'<div class="sb-project-copy"><span class="sb-eyebrow">OUR PROGRAMMES</span><h3>'+p[1]+'</h3><p>'+p[2]+'</p><button class="sb-text-link" onclick="'+action+'">Explore project <span aria-hidden="true">→</span></button></div></article>';
+            }).join('');
+            var pages = {
+                home: `<section class="sb-hero"><div class="sb-hero-copy"><span class="sb-eyebrow sb-eyebrow-light">COMMUNITY-BASED ORGANIZATION</span><h1>Empowering People.<br>Creating Opportunities.<br><em>Building Brighter Communities.</em></h1><p>SND Brightlife CBO works alongside communities to expand opportunity, strengthen livelihoods and support practical, community-led development.</p><div class="sb-actions"><button class="sb-button sb-button-green" onclick="renderSitemapPage('projects')">Explore Our Projects <span>→</span></button><button class="sb-button sb-button-outline-light" onclick="renderSitemapPage('donate')">Support Our Work</button></div></div><div class="sb-hero-image">${img('client-water-jerrycans-02.jpeg','Community water collection activity','')}<div class="sb-image-caption"><strong>Local priorities. Practical solutions.</strong><span>Building stronger communities together.</span></div></div></section><section class="sb-focus-strip"><div><span class="sb-focus-icon">♧</span><strong>Clean Water</strong><small>Water access & sanitation</small></div><div><span class="sb-focus-icon">▤</span><strong>Education</strong><small>Learning & skills</small></div><div><span class="sb-focus-icon">♡</span><strong>Health & Wellbeing</strong><small>Healthy communities</small></div><div><span class="sb-focus-icon">♧</span><strong>Livelihoods</strong><small>Enterprise & agriculture</small></div><div><span class="sb-focus-icon">◎</span><strong>Community</strong><small>Inclusive development</small></div></section><section class="sb-section sb-about-preview"><div class="sb-section-copy"><span class="sb-eyebrow">ABOUT SND BRIGHTLIFE CBO</span><h2>Stronger Communities.<br><em>Lasting Change.</em></h2><p>We are a community-driven organization focused on improving lives through practical opportunities, local participation and sustainable development. Our work connects community priorities with skills, resources and partnerships that can help families build more secure futures.</p><button class="sb-button sb-button-green" onclick="renderSitemapPage('about')">Learn More About Us <span>→</span></button></div><div class="sb-about-photo">${img('client-water-collection-01.jpeg','Community members at a local water collection point','')}</div></section><section class="sb-section sb-project-section"><div class="sb-section-heading"><div><span class="sb-eyebrow">OUR PROJECTS</span><h2>Sustainable Solutions for Lasting Impact</h2><p>Community programmes shaped by local needs and opportunities.</p></div><button class="sb-button sb-button-outline" onclick="renderSitemapPage('projects')">View All Projects <span>→</span></button></div><div class="sb-project-grid">${cards}</div></section><section class="sb-impact-band"><div><span class="sb-eyebrow sb-eyebrow-light">OUR IMPACT</span><h2>Real People. Practical Change.</h2><p>We work with community members, partners and local stakeholders to support initiatives that respond to everyday needs and build long-term resilience.</p><button class="sb-button sb-button-green" onclick="renderSitemapPage('governance')">Our Accountability <span>→</span></button></div><div class="sb-impact-points"><article><strong>Community-led</strong><span>Local voices shape priorities</span></article><article><strong>Practical action</strong><span>Focused on real needs</span></article><article><strong>Open to partnership</strong><span>Working together for impact</span></article></div></section><section class="sb-partner-band"><div><span class="sb-eyebrow">PARTNER WITH US</span><h2>Good work grows through partnership.</h2><p>We are developing project proposals and welcoming conversations with donors, institutions, businesses and community-minded supporters.</p><button class="sb-button sb-button-green" onclick="renderSitemapPage('partner')">Become a Partner <span>→</span></button></div><div class="sb-support-card"><span class="sb-support-symbol">♡</span><h3>Support Our Projects</h3><p>Help us connect priority community needs with the resources and relationships needed to respond.</p><button class="sb-button sb-button-green" onclick="renderSitemapPage('donate')">Support / Donate <span>→</span></button></div></section>`,
+                about: `<section class="sb-page-banner">${img('client-water-collection-01.jpeg','Community water access','sb-banner-image')}<div><span class="sb-eyebrow sb-eyebrow-light">WHO WE ARE</span><h1>About Us</h1><p>Our story. Our mission. Our people.</p></div></section><section class="sb-section sb-inner-grid"><div><span class="sb-eyebrow">WHO WE ARE</span><h2>Community-led development with people at the centre.</h2><p>SND Brightlife CBO is a community-based organization working to strengthen social and economic wellbeing through practical, locally relevant initiatives. We bring together community participation, livelihood development, learning and access to opportunities.</p><p>Our programme areas include water and sanitation, education, skills development, agriculture, enterprise, women and youth empowerment, and community development. Our community activities are supported by local participation, practical experience and a commitment to responsible, sustainable development.</p></div><div class="sb-image-panel">${img('client-water-jerrycans-01.jpeg','Water containers at a community collection point','')}<div class="sb-note"><strong>Our commitment</strong><p>Listen to communities, act on practical priorities and communicate openly about our work.</p></div></div></section><section class="sb-values-grid"><article><b>01</b><h3>Our Mission</h3><p>To empower individuals and communities through inclusive, practical programmes that strengthen wellbeing and sustainable livelihoods.</p></article><article><b>02</b><h3>Our Vision</h3><p>Healthy, resilient and empowered communities where people have opportunities to shape a brighter future.</p></article><article><b>03</b><h3>Our Values</h3><p>Community participation, integrity, inclusion, accountability, learning and responsible stewardship.</p></article></section><section class="sb-cta"><div><h2>Work with us to turn community priorities into progress.</h2><p>We welcome constructive partnerships and conversations.</p></div><button class="sb-button sb-button-green" onclick="renderSitemapPage('partner')">Partner With Us →</button></section>`,
+                projects: `<section class="sb-page-banner">${img('client-community-transport-02.jpeg','Community programme activity','sb-banner-image')}<div><span class="sb-eyebrow sb-eyebrow-light">OUR WORK</span><h1>Our Projects</h1><p>Real solutions. Lasting impact.</p></div></section><section class="sb-section"><div class="sb-section-heading"><div><span class="sb-eyebrow">OUR KEY PROJECTS</span><h2>Practical programmes shaped by community needs</h2><p>Explore our programme areas, community activities and project priorities. Each project profile can be updated with current activities, photographs and progress information.</p></div></div><div class="sb-project-grid sb-project-grid-large">${cards}</div></section><section class="sb-notice"><strong>Transparency note</strong><p>We work to connect community priorities with practical resources and long-term partnerships. Project information is maintained by the organization, with budgets and progress shared through appropriate project and partner communications.</p></section>`,
+                water: `<section class="sb-page-banner">${img('client-water-jerrycans-02.jpeg','Water collection at the community project','sb-banner-image')}<div><span class="sb-eyebrow sb-eyebrow-light">PROJECT DETAIL</span><h1>Water Project</h1><p>Clean water for healthier lives.</p></div></section><section class="sb-section sb-inner-grid"><div><span class="sb-eyebrow">PROJECT OVERVIEW</span><h2>Strengthening access to safe, reliable water.</h2><p>Access to safe water supports health, dignity, education and household wellbeing. Brightlife’s community water activities include water storage, collection and local infrastructure priorities, with continued work focused on reliable access, safe handling and sustainable management.</p><p>Continued improvements are guided by community priorities, practical site needs, technical advice and sustainable maintenance planning.</p><button class="sb-button sb-button-green" onclick="renderSitemapPage('donate')">Support This Project →</button></div><div class="sb-image-panel">${img('client-water-equipment-01.jpeg','Water storage containers and project equipment','')}<div class="sb-note"><strong>Project planning priorities</strong><ul><li>Confirm current service area and households reached</li><li>Document infrastructure needs and cost estimates</li><li>Agree maintenance, safety and community management plans</li><li>Publish verified progress and reporting updates</li></ul></div></div></section><section class="sb-values-grid"><article><b>01</b><h3>Need</h3><p>Document the local water access challenge and community priorities.</p></article><article><b>02</b><h3>Proposed response</h3><p>Develop a technically reviewed, costed plan for sustainable water access.</p></article><article><b>03</b><h3>Accountability</h3><p>Report verified reach, spending, maintenance and outcomes as the project develops.</p></article></section><p class="sb-disclaimer">Project figures and targets will be published after verification; no unverified beneficiary totals are represented here.</p>`,
+                governance: `<section class="sb-page-banner">${img('client-community-transport-02.jpeg','Community members working together','sb-banner-image')}<div><span class="sb-eyebrow sb-eyebrow-light">TRUST & ACCOUNTABILITY</span><h1>Governance</h1><p>Transparent. Accountable. Community-driven.</p></div></section><section class="sb-section"><div class="sb-section-heading"><div><span class="sb-eyebrow">HOW WE WORK</span><h2>Responsible leadership and clear accountability</h2><p>Good governance is essential to protect community trust, support responsible use of resources and build confidence with members and potential partners.</p></div></div><div class="sb-values-grid"><article><b>01</b><h3>Leadership & oversight</h3><p>Board and committee responsibilities should be documented, with decisions recorded and conflicts of interest managed.</p></article><article><b>02</b><h3>Financial stewardship</h3><p>Keep project contributions and member savings/loan funds clearly separated in records and reporting.</p></article><article><b>03</b><h3>Safeguarding & inclusion</h3><p>Respect dignity, protect children and vulnerable adults, and provide a clear channel for concerns or complaints.</p></article></div><div class="sb-notice"><strong>Documents and legal status</strong><p>Registration evidence, governance policies and the relevant public-health officer letter should be uploaded here once approved for public release. This page does not imply documents are attached when they have not been provided.</p></div></section>`,
+                partner: `<section class="sb-page-banner">${img('client-water-collection-01.jpeg','Community members and local project activity','sb-banner-image')}<div><span class="sb-eyebrow sb-eyebrow-light">PARTNER WITH US</span><h1>Build a Brighter Future</h1><p>We welcome partners who share our commitment to community-led development.</p></div></section><section class="sb-section sb-inner-grid"><div><span class="sb-eyebrow">WHY PARTNER WITH BRIGHTLIFE?</span><h2>Turn a shared commitment into practical community action.</h2><p>SND Brightlife CBO works with communities and welcomes relationships with local businesses, county and community institutions, foundations, diaspora networks and development partners to strengthen ongoing programmes and expand priority projects.</p><ul class="sb-check-list"><li>Water access and sanitation</li><li>Education, skills and youth opportunities</li><li>Livelihoods, agriculture and enterprise</li><li>Community wellbeing and inclusion</li></ul><p>We welcome concept notes, funding proposals, technical support offers and partnership enquiries. Please include the project area, proposed outcomes, indicative budget, implementation period and your organization’s contact details.</p><a class="sb-button sb-button-green" href="mailto:sndbrightlife@gmail.com?subject=Partnership%20or%20Funding%20Proposal%20%E2%80%94%20SND%20Brightlife%20CBO&body=Dear%20SND%20Brightlife%20CBO%2C%0A%0AI%20am%20contacting%20you%20regarding%20a%20potential%20partnership%20or%20funding%20proposal.%0A%0AOrganization%3A%0AProject%20area%3A%0AProposed%20support%3A%0AContact%20person%3A%0A%0AKind%20regards">Submit a Proposal by Email →</a><p class="sb-small-note">Email: <a href="mailto:sndbrightlife@gmail.com">sndbrightlife@gmail.com</a> · For a large proposal, attach a PDF and a separate project budget.</p></div><div class="sb-image-panel">${img('client-community-transport-02.jpeg','Community project logistics','')}<div class="sb-note"><strong>Our current stage</strong><p>We value practical collaboration, responsible stewardship and clear reporting. Partners are invited to discuss project priorities, implementation approaches and the evidence available for each programme.</p></div></div></section>`,
+                donate: `<section class="sb-page-banner">${img('client-water-jerrycans-02.jpeg','Water access and community needs','sb-banner-image')}<div><span class="sb-eyebrow sb-eyebrow-light">SUPPORT OUR WORK</span><h1>Support Our Projects</h1><p>Your partnership can help community-led solutions move forward.</p></div></section><section class="sb-section sb-inner-grid"><div><span class="sb-eyebrow">MAKE A DIFFERENCE</span><h2>Help us prepare and deliver practical community projects.</h2><p>We welcome funding partners who want to strengthen ongoing community activities and support priority projects, including clean water access, livelihoods, skills and community wellbeing.</p><p>To protect donor trust and member funds, donations should be received only through an officially approved organization account with clear records and reporting. We have not published payment details here because verified, board-approved donation instructions have not been provided.</p><a class="sb-button sb-button-green" href="mailto:sndbrightlife@gmail.com?subject=Funding%20Proposal%20%E2%80%94%20SND%20Brightlife%20CBO&body=Dear%20SND%20Brightlife%20CBO%2C%0A%0AI%20would%20like%20to%20discuss%20supporting%20a%20community%20project.%0A%0AOrganization%3A%0AProject%20of%20interest%3A%0AProposed%20support%3A%0AContact%20person%3A%0A%0AKind%20regards">Email a Funding Proposal →</a></div><div class="sb-image-panel">${img('client-water-equipment-02.jpeg','Community water project equipment','')}<div class="sb-note"><strong>Before you give</strong><p>Please contact the organization to confirm approved channels, the intended project use and how contributions will be acknowledged and reported.</p></div></div></section><section class="sb-notice"><strong>Transparency promise</strong><p>Contributions should be agreed through an official organizational contact, allocated to a clearly identified purpose and recorded for accountability. Please confirm the designated recipient and written instructions directly with the organization before transferring funds.</p></section>`,
+                contact: `<section class="sb-page-banner">${img('client-community-transport-02.jpeg','SND Brightlife community activities','sb-banner-image')}<div><span class="sb-eyebrow sb-eyebrow-light">CONTACT</span><h1>Contact Us</h1><p>We would like to hear from you.</p></div></section><section class="sb-section sb-contact-grid"><div><span class="sb-eyebrow">GET IN TOUCH</span><h2>Let’s talk about community priorities and partnership.</h2><div class="sb-contact-item"><strong>Phone</strong><a href="tel:+254711765739">+254 711 765 739</a></div><div class="sb-contact-item"><strong>Email</strong><a href="mailto:sndbrightlife@gmail.com">sndbrightlife@gmail.com</a></div><div class="sb-contact-item"><strong>Location</strong><span>Sindo, Homa Bay County, Kenya</span></div></div><form class="sb-contact-form" onsubmit="event.preventDefault();alert('Thank you. Please email sndbrightlife@gmail.com or call +254 711 765 739 so the team can respond directly.')"><h3>Send a message</h3><label for="sb-name">Name</label><input id="sb-name" required placeholder="Your name"><label for="sb-email">Email</label><input id="sb-email" type="email" required placeholder="you@example.com"><label for="sb-message">Message</label><textarea id="sb-message" rows="5" required placeholder="How would you like to connect?"></textarea><button class="sb-button sb-button-green" type="submit">Send Message →</button><small>This form currently provides an on-page confirmation only. For a guaranteed response, email or call us directly.</small></form></section>`,
+                terms: '<section class="sb-page-banner"><div><span class="sb-eyebrow sb-eyebrow-light">MEMBER SERVICES</span><h1>Savings & Loan Information</h1><p>Member savings, responsible borrowing and transparent repayment terms.</p></div></section><section class="sb-section"><div class="sb-section-heading"><div><span class="sb-eyebrow">SAVINGS & LOANS</span><h2>Loan repayment bands</h2><p>The existing member loan schedule is shown below for reference.</p></div></div><div class="sb-values-grid"><article><b>01</b><h3>Repayment within 7 days</h3><p>12% interest</p></article><article><b>02</b><h3>8–14 days</h3><p>16% interest</p></article><article><b>03</b><h3>15–20 days</h3><p>18% interest</p></article><article><b>04</b><h3>21–30 days</h3><p>20% interest</p></article></div><div class="sb-note"><strong>Other existing loan conditions</strong><p>Processing fee: KES 250. Normal loans require at least two eligible member guarantors and are subject to approval, verification, eligibility and available funds. Emergency loans carry 20% interest with a maximum repayment period of 10 days and a KES 250 processing fee.</p></div><p>Before applying, members should confirm the applicable amount, calculation method, total repayment, due date and any charges with the CBO. The terms shown here are the existing member schedule and do not replace the loan agreement for an individual application.</p><button class="sb-button sb-button-green" onclick="openMemberLogin()">Member Login →</button></section>'
+            };
+            var titleMap={home:'Home',about:'About Us',projects:'Our Projects',water:'Water Project',governance:'Governance',partner:'Partner With Us',donate:'Support Us / Donate',contact:'Contact Us',terms:'Savings & Loan Information',notfound:'Page Not Found'};
+            if(page==='404') page='notfound';
+            var nav = `<header class="sb-header"><button class="sb-brand" onclick="renderSitemapPage('home')" aria-label="SND Brightlife CBO home"><img src="/assets/images/snd-brightlife-mark.png" alt=""><span><strong>SND Brightlife CBO</strong><small>Community-led solutions for sustainable development</small></span></button><button class="sb-mobile-toggle" onclick="document.querySelector('.sb-nav').classList.toggle('sb-nav-open')" aria-label="Toggle navigation">☰</button><nav class="sb-nav" aria-label="Main navigation"><button onclick="renderSitemapPage('home')">Home</button><button onclick="renderSitemapPage('about')">About Us</button><button onclick="renderSitemapPage('projects')">Our Projects</button><button onclick="renderSitemapPage('water')">Water Project</button><button onclick="renderSitemapPage('governance')">Governance</button><button onclick="renderSitemapPage('partner')">Partner With Us</button><button onclick="renderSitemapPage('donate')">Support Us</button><button class="sb-nav-login" onclick="openMemberLogin()">Member Login</button><button class="sb-nav-register" onclick="openMemberRegistration()">Register</button></nav></header>`;
+            var footer = `<footer class="sb-footer"><div class="sb-footer-brand"><strong>SND Brightlife CBO</strong><p>Empowering People. Creating Opportunities. Building Brighter Communities.</p><small>Sindo, Homa Bay County, Kenya</small></div><div><strong>Explore</strong><button onclick="renderSitemapPage('about')">About Us</button><button onclick="renderSitemapPage('projects')">Our Projects</button><button onclick="renderSitemapPage('governance')">Governance</button></div><div><strong>Get involved</strong><button onclick="renderSitemapPage('partner')">Partner With Us</button><button onclick="renderSitemapPage('donate')">Support Our Work</button><button onclick="renderSitemapPage('contact')">Contact Us</button></div><div><strong>Contact</strong><a href="tel:+254711765739">+254 711 765 739</a><a href="mailto:sndbrightlife@gmail.com">sndbrightlife@gmail.com</a><button onclick="renderSitemapPage('terms')">Savings & Loan Information</button></div><div class="sb-footer-bottom">© ${new Date().getFullYear()} SND Brightlife CBO. All rights reserved. <span>Community first · Accountability always</span></div></footer>`;
+            var content = pages[page] || `<section class="sb-error-page"><div class="sb-error-code">404</div><span class="sb-eyebrow">PAGE NOT FOUND</span><h1>We can’t find that page.</h1><p>The link may be outdated, or the page may have moved. Return to the SND Brightlife CBO homepage to continue exploring our work.</p><button class="sb-button sb-button-green" onclick="renderSitemapPage('home')">Return to Home <span aria-hidden="true">→</span></button></section>`;
+            el.innerHTML = '<div class="sb-site">'+nav+'<main class="sb-main">'+content+'</main>'+footer+'</div>';
+            document.body.classList.add('public-site-body');
+            // Public project cards always reflect the latest content published by an administrator.
+            getPublicContentMap(['water','education','women','agriculture','community_development','poultry']).then(function(map){
+                el.querySelectorAll('.sb-project-card[data-project-key]').forEach(function(card){
+                    var key=card.getAttribute('data-project-key'), item=map&&map[key];
+                    if(!item)return;
+                    var heading=card.querySelector('h3'), paragraph=card.querySelector('p'), image=card.querySelector('img');
+                    if(heading&&item.title)heading.textContent=item.title;
+                    if(paragraph&&item.body)paragraph.textContent=item.body;
+                    var imageUrl=projectImageUrl(map,key);
+                    if(image&&imageUrl)image.src=imageUrl;
+                });
+                // Surface the administrator's latest water-project update on the dedicated sitemap detail page.
+                var waterUpdate=map&&map.water;
+                if(page==='water' && waterUpdate && (String(waterUpdate.title||'').trim() || String(waterUpdate.body||'').trim() || String(waterUpdate.image_url||'').trim())){
+                    var main=el.querySelector('.sb-main');
+                    if(main && !main.querySelector('#sb-water-published-update')){
+                        var section=document.createElement('section'); section.id='sb-water-published-update'; section.className='sb-section';
+                        var heading=document.createElement('div'); heading.className='sb-section-heading';
+                        var copy=document.createElement('div');
+                        var eyebrow=document.createElement('span'); eyebrow.className='sb-eyebrow'; eyebrow.textContent='LATEST PROJECT UPDATE';
+                        var title=document.createElement('h2'); title.textContent=waterUpdate.title||'Water Project Update';
+                        var description=document.createElement('p'); description.textContent=waterUpdate.body||'The latest project photograph and information are shared by the organization.';
+                        copy.append(eyebrow,title,description); heading.appendChild(copy); section.appendChild(heading);
+                        var photoUrl=projectImageUrl(map,'water');
+                        if(photoUrl){var photo=document.createElement('img');photo.src=photoUrl;photo.alt=waterUpdate.title||'Water project update';photo.loading='lazy';photo.style.cssText='display:block;width:100%;max-height:380px;object-fit:cover;border-radius:16px;margin-top:18px';photo.onerror=function(){this.onerror=null;this.src='/assets/images/client-water-jerrycans-02.jpeg';};section.appendChild(photo);}
+                        main.appendChild(section);
+                    }
+                }
+            }).catch(function(){});
+            document.documentElement.classList.add('public-site-html');
+            var mainWrapper=document.getElementById('mainWrapper');
+            if(mainWrapper){mainWrapper.classList.add('public-site-mode');mainWrapper.style.marginLeft='0';mainWrapper.style.width='100%';mainWrapper.style.maxWidth='100%';mainWrapper.style.padding='0';}
+            var landing=document.getElementById('publicHomeLanding'); if(landing) landing.style.display='block';
+            var auth=document.getElementById('app'); if(auth) auth.style.display='none';
+            if(page==='home') { try { if(pushHistory===false) history.replaceState({brightlife:'home'},'',location.pathname+location.search); else history.replaceState({brightlife:'home'},'',location.pathname+location.search); } catch(e){} }
+            else if(pushHistory!==false) { try { history.pushState({brightlife:'sitemap',page:page},'','#'+page); } catch(e){} }
+            else { try { history.replaceState({brightlife:'sitemap',page:page},'','#'+page); } catch(e){} }
             window.scrollTo({top:0,behavior:'auto'});
         }
+        window.renderSitemapPage = renderSitemapPage;
+        window.renderPublicHomeLanding = renderPublicHomeLanding;
         function showPublicLoanTerms() {
             var el=document.getElementById('publicHomeContent');
             if(!el) return;
@@ -6254,7 +6267,7 @@ html+=`<div class="section-card" id="reportFilters"><div class="section-title"><
                     <header class="public-main-header">
                         <div class="public-header-inner">
                             <button type="button" class="public-brand" onclick="showPublicHome()" aria-label="SND Brightlife CBO Home">
-                                <img src="assets/images/snd-brightlife-mark.png" alt="SND Brightlife CBO">
+                                <img src="/assets/images/snd-brightlife-mark.png" alt="SND Brightlife CBO">
                                 <span><strong>SND Brightlife CBO</strong><small>Community - Led Solutions for Sustainable Development</small></span>
                             </button>
                             <nav class="public-main-nav" aria-label="Main navigation">
@@ -6421,7 +6434,7 @@ html+=`<div class="section-card" id="reportFilters"><div class="section-title"><
                     ['training','Training & Capacity Building','Seminars, workshops, community training, lessons and photos.']
                 ];
                 var html='<div class="dashboard-body"><div class="welcome-hero"><div><div class="welcome-kicker">Authorized Personnel</div><div class="welcome-title">CBO Content Management</div><div class="welcome-sub">Publish clear, factual updates for members and the public. Financial records remain separate from this area.</div></div></div><div class="section-card" style="margin-bottom:14px;border-left:4px solid var(--primary);"><div class="section-title"><i class="fas fa-layer-group"></i> Projects are administrator-managed</div><p style="font-size:12px;color:var(--gray-600);line-height:1.7;margin:0;">Update any project whenever there is new approved information. Change the title, description and photo URL, then press <strong>Save &amp; Publish</strong>. The public Projects page reads the published content directly, so you do not need to edit the website code for routine project updates.</p></div><div class="site-grid">';
-                sections.forEach(function(sec){var r=byKey[sec[0]]||{};html+='<div class="section-card content-editor-card" style="grid-column:1/-1"><div class="section-title"><i class="fas fa-pen-to-square"></i> '+escapeHtml(sec[1])+'</div><p style="font-size:11px;color:var(--gray-500);margin:0 0 14px">'+escapeHtml(sec[2])+'</p><div class="content-editor-grid"><div class="form-group"><label>Title / Heading</label><input class="form-control" id="contentTitle_'+sec[0]+'" value="'+escapeHtml(r.title||'')+'" placeholder="Enter title"></div><div class="form-group"><label>Photo URL (optional)</label><input class="form-control" id="contentPhoto_'+sec[0]+'" value="'+escapeHtml(r.image_url||'')+'" placeholder="https://..." oninput="updateContentPhotoPreview(&quot;'+sec[0]+'&quot;)"><small style="display:block;margin-top:6px;color:var(--gray-500)">Optional replacement photo. The website already includes a project photo by default; paste a public JPG, PNG or WebP URL here to replace it. Google Drive share links are converted where possible.</small><img id="contentPhotoPreview_'+sec[0]+'" alt="Photo preview" style="display:none;width:100%;max-width:360px;max-height:190px;object-fit:cover;border-radius:10px;margin-top:10px;border:1px solid #dbe3ec"><small id="contentPhotoMessage_'+sec[0]+'" style="display:block;margin-top:5px;color:#64748b">Paste a direct photo link to preview it here.</small></div><div class="form-group" style="grid-column:1/-1"><label>Notes / Description</label><textarea class="form-control" id="contentBody_'+sec[0]+'" rows="4" placeholder="Write the approved update…">'+escapeHtml(r.body||'')+'</textarea></div></div><div style="display:flex;justify-content:flex-end;margin-top:12px"><button class="btn-primary" onclick="saveSiteContent(&quot;'+sec[0]+'&quot;)"><i class="fas fa-cloud-arrow-up"></i> Save & Publish</button></div></div>';});
+                sections.forEach(function(sec){var r=byKey[sec[0]]||{};html+='<div class="section-card content-editor-card" style="grid-column:1/-1"><div class="section-title"><i class="fas fa-pen-to-square"></i> '+escapeHtml(sec[1])+'</div><p style="font-size:11px;color:var(--gray-500);margin:0 0 14px">'+escapeHtml(sec[2])+'</p><div class="content-editor-grid"><div class="form-group"><label>Title / Heading</label><input class="form-control" id="contentTitle_'+sec[0]+'" value="'+escapeHtml(r.title||'')+'" placeholder="Enter title"></div><div class="form-group"><label>Photo URL (optional)</label><input class="form-control" id="contentPhoto_'+sec[0]+'" value="'+escapeHtml(r.image_url||'')+'" placeholder="https://..." oninput="updateContentPhotoPreview(&quot;'+sec[0]+'&quot;)"><small style="display:block;margin-top:6px;color:var(--gray-500)">Optional replacement photo. Paste a publicly accessible JPG, PNG or WebP URL, or use a local path such as /assets/images/client-water-jerrycans-01.jpeg. Google Drive share links are converted where possible.</small><img id="contentPhotoPreview_'+sec[0]+'" alt="Photo preview" style="display:none;width:100%;max-width:360px;max-height:190px;object-fit:cover;border-radius:10px;margin-top:10px;border:1px solid #dbe3ec"><small id="contentPhotoMessage_'+sec[0]+'" style="display:block;margin-top:5px;color:#64748b">Paste a direct photo link to preview it here.</small></div><div class="form-group" style="grid-column:1/-1"><label>Notes / Description</label><textarea class="form-control" id="contentBody_'+sec[0]+'" rows="4" placeholder="Write the approved update…">'+escapeHtml(r.body||'')+'</textarea></div></div><div style="display:flex;justify-content:flex-end;margin-top:12px"><button class="btn-primary" onclick="saveSiteContent(&quot;'+sec[0]+'&quot;)"><i class="fas fa-cloud-arrow-up"></i> Save & Publish</button></div></div>';});
                 html+='</div></div>';el.innerHTML=html;
                 sections.forEach(function(sec){updateContentPhotoPreview(sec[0]);});
             }catch(e){el.innerHTML='<div class="dashboard-body"><div class="section-card"><div class="alert alert-error">'+escapeHtml(e.message||'Unable to load content manager.')+'</div></div></div>';}
@@ -6587,14 +6600,15 @@ html+=`<div class="section-card" id="reportFilters"><div class="section-title"><
                 var guestBootLoader = document.getElementById('brightlifeBootLoader');
                 if (guestBootLoader) guestBootLoader.style.display = 'none';
                 updateUserInfo(null);
+                var memberAction = new URLSearchParams(window.location.search).get('member');
+                var publicRoute = (window.location.hash || '').replace('#','');
                 showPublicHome(false);
                 hideSidebar();
                 try {
-                    var memberAction = new URLSearchParams(window.location.search).get('member');
-                    var publicRoute = (window.location.hash || '').replace('#','');
                     if (memberAction === 'login') setTimeout(function(){ openMemberLogin(); }, 80);
                     else if (memberAction === 'register') setTimeout(function(){ openMemberRegistration(); }, 80);
-                    else if (['about','programs','approach','finance','membership','projects','partner','contact'].indexOf(publicRoute) >= 0) setTimeout(function(){ showBrightlifeInnerPage(publicRoute, false); }, 80);
+                    else if (['home','about','projects','water','governance','partner','donate','contact','terms','404','notfound'].indexOf(publicRoute) >= 0) setTimeout(function(){ renderSitemapPage(publicRoute, false); }, 80);
+                    else if (['programs','approach','finance','membership'].indexOf(publicRoute) >= 0) setTimeout(function(){ showBrightlifeInnerPage(publicRoute, false); }, 80);
                 } catch (e) {}
                 setElementDisplaySafe('nav-settings', 'none');
                 setElementDisplaySafe('nav-chat', 'none');

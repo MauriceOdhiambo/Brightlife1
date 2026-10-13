@@ -56,27 +56,28 @@ The workspace uses a persistent member navigation shell, responsive navigation, 
 Deploy the repository to the existing Vercel project with the required environment variables. No database migration is required for this frontend/Node runtime modernization.
 
 
-## Public website refresh (October 2026)
+## Public website and sitemap implementation
 
-- The public landing page now follows the supplied sitemap direction: clear public CBO identity, project discovery, water-project detail, governance, partnership, support/donation information, and contact pathways.
-- Public/member functions remain in the existing application; member login and registration controls are retained.
-- Public photo assets are centralized in `assets/images/`. Client-supplied photographs use descriptive `client-*` filenames; the local logo mark and programme imagery are stored in the same directory.
-- Do not publish unverified beneficiary totals, registration evidence, project budgets, donation payment details, or legal claims. Add approved documents and verified figures when the board authorizes them.
-- The board is reviewing the savings/loan interest structure. The public information page deliberately states that terms are under review and should not be treated as final.
-- The contact form currently shows an on-page confirmation only; the published phone and email are provided for direct contact until a backend submission endpoint is connected.
+The public website is structured around the supplied SND Brightlife CBO sitemap: Home, About Us, Our Projects, Water Project detail, Governance, Partner With Us, Support Us / Donate, Contact Us and Savings & Loan Information. Member login, registration, savings and loans dashboard, guarantor portal and the dedicated 404 state remain part of the existing application.
 
-## Sitemap rebuild (October 2026)
+### Images and content
 
-The public website now uses the sitemap-aligned page renderer for Home, About Us, Our Projects, Water Project detail, Governance, Partner With Us, Support Us / Donate, Contact, Savings & Loan Information and a dedicated 404 state. The existing member authentication and financial workflows are retained rather than replaced with static mockups. The primary public navigation links into these pages, while member login and registration continue to open the existing forms.
+- Website image files are centralized in `assets/images/` and referenced with root-relative paths (`/assets/images/<filename>`), so images continue to resolve on nested routes and hash-based pages.
+- The project includes descriptive copies of the additional client-supplied photographs covering water collection and storage, poultry activities, bicycle repair and community transport.
+- Public pages use real client-supplied activity photographs in place of the generic category artwork where suitable photos are available. Image elements include a local fallback in case a source file fails to load.
+- Administrator-published project titles, descriptions and photo URLs are reflected in the public project cards and project detail view. The Content Management page accepts direct public image URLs or local paths under `/assets/images/`.
+- The Partner With Us and Support Us pages include a direct email pathway for funding proposals and partnership enquiries at `sndbrightlife@gmail.com`.
+- The public Savings & Loan Information page uses the existing member loan bands: 12% for up to 7 days, 16% for 8–14 days, 18% for 15–20 days, and 20% for 21–30 days. The processing fee and existing guarantor conditions are also described.
 
-### Image handling
+### Run locally
 
-Public assets are stored centrally in `assets/images/` and referenced from the site root using `/assets/images/<filename>`. Client-provided water, poultry and community-transport photographs are used where they genuinely match the content. Programme imagery without a matching client photograph is retained as illustrative material and must not be treated as evidence that a particular activity has been delivered. Replace those remaining illustrative images with licensed web photographs or additional approved client photographs before launch; preserve image credits/licensing records when using third-party photography.
+```bash
+npm install
+node --env-file=.env server.mjs
+```
 
-### Review before launch
+The application is available at `http://localhost:3000`. Use `npm run check` to run the JavaScript syntax checks for the server and browser application.
 
-- Verify the public pages at desktop, tablet and mobile sizes against the supplied sitemap.
-- Confirm that login, registration, member dashboard, savings/loans and guarantor flows still work with the production backend.
-- Publish registration certificates, health officer correspondence, governance documents, verified project budgets and impact figures only after authorization.
-- Keep the savings-and-loans interest terms marked as under board review until the board and appropriate Kenyan legal/regulatory advisers approve the final disclosure.
-- Do not publish donation account details until they are formally approved and separated from member savings/loan funds.
+### Deployment notes
+
+Deploy the repository to the existing hosting project with its required environment variables. Keep administrator credentials and service keys on the server only. Verify public pages, uploaded/published project content and the member workflows in the deployment environment before release.
