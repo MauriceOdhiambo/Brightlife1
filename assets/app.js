@@ -1246,7 +1246,7 @@ function updateUserInfo(member) {
                 var active=activePage===key ? ' class="active" aria-current="page"' : '';
                 return '<button type="button"'+active+' onclick="closeBrightlifeInnerMenu();'+action+'">'+label+'</button>';
             }).join('');
-            return `<header class="bl-inner-header"><div class="bl-inner-head"><button type="button" class="bl-brand" onclick="closeBrightlifeInnerMenu();showPublicHome()" aria-label="SND Brightlife CBO Home"><img src="assets/images/snd-brightlife-mark.png" alt="SND Brightlife CBO"><span><strong>SND Brightlife CBO</strong><small>Empowering People. Building Livelihoods. Transforming Communities.</small></span></button><button type="button" class="bl-inner-menu-toggle" aria-label="Open website menu" aria-expanded="false" onclick="toggleBrightlifeInnerMenu(event)"><i class="fas fa-bars"></i><span>Menu</span></button><nav id="brightlifeInnerNav" aria-label="Website navigation">${nav}<button type="button" class="bl-login" onclick="closeBrightlifeInnerMenu();openMemberLogin()">Member Login</button></nav></div></header>`;
+            return `<header class="bl-inner-header"><div class="bl-inner-head"><button type="button" class="bl-brand" onclick="closeBrightlifeInnerMenu();showPublicHome()" aria-label="SND Brightlife CBO Home"><img src="/assets/images/snd-brightlife-mark.png" alt="SND Brightlife CBO"><span><strong>SND Brightlife CBO</strong><small>Empowering People. Building Livelihoods. Transforming Communities.</small></span></button><button type="button" class="bl-inner-menu-toggle" aria-label="Open website menu" aria-expanded="false" onclick="toggleBrightlifeInnerMenu(event)"><i class="fas fa-bars"></i><span>Menu</span></button><nav id="brightlifeInnerNav" aria-label="Website navigation">${nav}<button type="button" class="bl-login" onclick="closeBrightlifeInnerMenu();openMemberLogin()">Member Login</button></nav></div></header>`;
         }
 
         function loadPublicHomePage(){
@@ -1304,7 +1304,7 @@ function updateUserInfo(member) {
                     </main>
 
                     <footer class="brightlife-home-footer reference-footer">
-                        <div class="reference-footer-brand"><img src="assets/images/snd-brightlife-mark.png" alt="SND Brightlife CBO"><div><strong>SND BRIGHTLIFE CBO</strong><span>Empowering People. Building Livelihoods.<br>Transforming Communities.</span></div></div>
+                        <div class="reference-footer-brand"><img src="/assets/images/snd-brightlife-mark.png" alt="SND Brightlife CBO"><div><strong>SND BRIGHTLIFE CBO</strong><span>Empowering People. Building Livelihoods.<br>Transforming Communities.</span></div></div>
                         <div class="reference-footer-links"><button onclick="showPublicHome()">Home</button><i>│</i><button onclick="showBrightlifeInnerPage('about')">About Us</button><i>│</i><button onclick="showBrightlifeInnerPage('programs')">Programmes</button><i>│</i><button onclick="showBrightlifeInnerPage('finance')">Financial Empowerment</button><i>│</i><button onclick="showBrightlifeInnerPage('membership')">Membership</button><i>│</i><button onclick="navigateTo('projects')">Projects</button><i>│</i><button onclick="showBrightlifeInnerPage('partner')">Partner With Us</button><i>│</i><button onclick="showBrightlifeInnerPage('contact')">Contact</button></div>
                         <div class="reference-footer-contact"><span><i class="fas fa-phone"></i> +254 711 765 739</span><span><i class="fas fa-envelope"></i> sndbrightlife@gmail.com</span><span><i class="fas fa-location-dot"></i> Kenya</span></div>
                         <div class="reference-footer-line"></div><b>SAVE&nbsp; • &nbsp;LEARN&nbsp; • &nbsp;BUILD&nbsp; • &nbsp;EMPOWER&nbsp; • &nbsp;GROW</b>
@@ -5895,13 +5895,20 @@ html+=`<div class="section-card" id="reportFilters"><div class="section-title"><
             var secureRouteMap={dashboard:1,savings:1,loans:1,loanmanagement:1,guarantors:1,repayments:1,transactions:1,reports:1,profile:1,messages:1,settings:1,contentmanagement:1,adminsettings:1,admin:1,members:1,alltransactions:1,executive:1,chat:1,rights:1};
             if(h==='member-login'){ openMemberLogin(false); return; }
             if(h==='member-registration'){ openMemberRegistration(false); return; }
-            if(['about','programs','approach','finance','membership','projects','partner','contact'].indexOf(h)>=0){ showBrightlifeInnerPage(h,false); return; }
+            var sitemapRoutes=['home','about','projects','water','governance','partner','donate','contact','terms','404','notfound'];
+            if(sitemapRoutes.indexOf(h)>=0){ if(typeof renderSitemapPage==='function') renderSitemapPage(h,false); else showPublicHome(false); return; }
+            if(['programs','approach','finance','membership'].indexOf(h)>=0){ showBrightlifeInnerPage(h,false); return; }
             if(secureRouteMap[h]){ if(getCanonicalMemberId()) navigateTo(h); else openMemberLogin(false); return; }
             if(h.indexOf('project-')===0 || h==='trainings'){ if(getCanonicalMemberId() || h==='trainings') navigateTo(h); else showPublicHome(false); return; }
             if(h==='home'||!h){ showPublicHome(false); }
         });
 
         function showPublicHome(pushHistory) {
+            // The public CBO website follows the approved sitemap; member workflows remain in the existing portal.
+            if (typeof renderSitemapPage === 'function') {
+                renderSitemapPage('home', pushHistory === false ? false : true);
+                return;
+            }
             try {
                 if (location.hash !== '#home') {
                     if (pushHistory === false) history.replaceState({brightlife:'public-home'}, '', '#home');
@@ -6130,23 +6137,23 @@ html+=`<div class="section-card" id="reportFilters"><div class="section-title"><
             renderSitemapPage('home');
         }
 
-        function renderSitemapPage(page) {
+        function renderSitemapPage(page, pushHistory) {
             var el = document.getElementById('publicHomeContent');
             if (!el) return;
             var img = function(name, alt, cls) {
-                return '<img class="'+(cls||'')+'" src="assets/images/'+name+'" alt="'+alt.replace(/"/g,'&quot;')+'" loading="lazy">';
+                return '<img class="'+(cls||'')+'" src="/assets/images/'+name+'" alt="'+alt.replace(/"/g,'&quot;')+'" loading="lazy">';
             };
             var projectCards = [
                 ['water.jpg','Water Project','Clean water access, safe storage and community-led water infrastructure.','water'],
                 ['education.jpg','Education Support','Learning opportunities, school support and practical skills.','projects'],
                 ['women.jpg','Women & Wellbeing','Inclusive opportunities that support dignity, health and empowerment.','projects'],
                 ['agriculture.jpg','Agriculture & Food Security','Sustainable farming, food production and resilient livelihoods.','projects'],
-                ['community_development.jpg','Community Development','Locally driven action shaped around community priorities.','projects'],
+                ['client-community-transport-01.jpeg','Community Development','Locally driven action shaped around community priorities.','projects'],
                 ['poultry.jpg','Poultry Project','Small-scale poultry keeping and household income opportunities.','projects']
             ];
             var cards = projectCards.map(function(p){
                 var source = p[0];
-                if(source==='water.jpg') source='client-water-jerrycans-02.jpeg';
+                if(source==='water.jpg') source='client-water-tank-activity-01.jpeg';
                 if(source==='poultry.jpg') source='client-poultry-01.jpeg';
                 return '<article class="sb-project-card">'+img(source,p[1],'sb-card-image')+'<div class="sb-project-copy"><span class="sb-eyebrow">OUR PROGRAMMES</span><h3>'+p[1]+'</h3><p>'+p[2]+'</p><button class="sb-text-link" onclick="renderSitemapPage(\''+p[3]+'\')">Explore project <span aria-hidden="true">→</span></button></div></article>';
             }).join('');
@@ -6161,10 +6168,11 @@ html+=`<div class="section-card" id="reportFilters"><div class="section-title"><
                 contact: `<section class="sb-page-banner">'+img('client-community-transport-02.jpeg','SND Brightlife community activities','sb-banner-image')+'<div><span class="sb-eyebrow sb-eyebrow-light">CONTACT</span><h1>Contact Us</h1><p>We would like to hear from you.</p></div></section><section class="sb-section sb-contact-grid"><div><span class="sb-eyebrow">GET IN TOUCH</span><h2>Let’s talk about community priorities and partnership.</h2><div class="sb-contact-item"><strong>Phone</strong><a href="tel:+254711765739">+254 711 765 739</a></div><div class="sb-contact-item"><strong>Email</strong><a href="mailto:sndbrightlife@gmail.com">sndbrightlife@gmail.com</a></div><div class="sb-contact-item"><strong>Location</strong><span>Sindo, Homa Bay County, Kenya</span></div></div><form class="sb-contact-form" onsubmit="event.preventDefault();alert('Thank you. Please email sndbrightlife@gmail.com or call +254 711 765 739 so the team can respond directly.')"><h3>Send a message</h3><label for="sb-name">Name</label><input id="sb-name" required placeholder="Your name"><label for="sb-email">Email</label><input id="sb-email" type="email" required placeholder="you@example.com"><label for="sb-message">Message</label><textarea id="sb-message" rows="5" required placeholder="How would you like to connect?"></textarea><button class="sb-button sb-button-green" type="submit">Send Message →</button><small>This form currently provides an on-page confirmation only. For a guaranteed response, email or call us directly.</small></form></section>`,
                 terms: '<section class="sb-page-banner"><div><span class="sb-eyebrow sb-eyebrow-light">MEMBER INFORMATION</span><h1>Savings & Loan Information</h1><p>Terms must be clear, reviewed and approved before members borrow.</p></div></section><section class="sb-section"><div class="sb-notice"><strong>Board review in progress</strong><p>The board is currently reviewing the loan interest structure. The previous short repayment bands should not be treated as final or advertised as approved terms until the board and appropriate Kenyan legal/regulatory advisers have completed their review.</p></div><p>Before any loan is offered, members should be shown the complete cost of credit, how interest is calculated, all fees, repayment dates, consequences of late payment, a clear maximum charge, and the process for raising a complaint. Do not infer an annual rate from a short-term fee until the calculation method and terms are confirmed.</p><p>For clarification, contact the CBO directly. This website information is not legal or financial advice.</p><button class="sb-button sb-button-green" onclick="openMemberLogin()">Member Login →</button></section>'
             };
-            var titleMap={home:'Home',about:'About Us',projects:'Our Projects',water:'Water Project',governance:'Governance',partner:'Partner With Us',donate:'Support Us / Donate',contact:'Contact Us',terms:'Savings & Loan Information'};
-            var nav = `<header class="sb-header"><button class="sb-brand" onclick="renderSitemapPage('home')" aria-label="SND Brightlife CBO home"><img src="assets/images/snd-brightlife-mark.png" alt=""><span><strong>SND Brightlife CBO</strong><small>Community-led solutions for sustainable development</small></span></button><button class="sb-mobile-toggle" onclick="document.querySelector('.sb-nav').classList.toggle('sb-nav-open')" aria-label="Toggle navigation">☰</button><nav class="sb-nav" aria-label="Main navigation"><button onclick="renderSitemapPage('home')">Home</button><button onclick="renderSitemapPage('about')">About Us</button><button onclick="renderSitemapPage('projects')">Our Projects</button><button onclick="renderSitemapPage('governance')">Governance</button><button onclick="renderSitemapPage('partner')">Partner With Us</button><button onclick="renderSitemapPage('contact')">Contact</button><button class="sb-nav-login" onclick="openMemberLogin()">Member Login</button><button class="sb-nav-register" onclick="openMemberRegistration()">Register</button></nav></header>`;
+            var titleMap={home:'Home',about:'About Us',projects:'Our Projects',water:'Water Project',governance:'Governance',partner:'Partner With Us',donate:'Support Us / Donate',contact:'Contact Us',terms:'Savings & Loan Information',notfound:'Page Not Found'};
+            if(page==='404') page='notfound';
+            var nav = `<header class="sb-header"><button class="sb-brand" onclick="renderSitemapPage('home')" aria-label="SND Brightlife CBO home"><img src="/assets/images/snd-brightlife-mark.png" alt=""><span><strong>SND Brightlife CBO</strong><small>Community-led solutions for sustainable development</small></span></button><button class="sb-mobile-toggle" onclick="document.querySelector('.sb-nav').classList.toggle('sb-nav-open')" aria-label="Toggle navigation">☰</button><nav class="sb-nav" aria-label="Main navigation"><button onclick="renderSitemapPage('home')">Home</button><button onclick="renderSitemapPage('about')">About Us</button><button onclick="renderSitemapPage('projects')">Our Projects</button><button onclick="renderSitemapPage('water')">Water Project</button><button onclick="renderSitemapPage('governance')">Governance</button><button onclick="renderSitemapPage('partner')">Partner With Us</button><button onclick="renderSitemapPage('donate')">Support Us</button><button class="sb-nav-login" onclick="openMemberLogin()">Member Login</button><button class="sb-nav-register" onclick="openMemberRegistration()">Register</button></nav></header>`;
             var footer = `<footer class="sb-footer"><div class="sb-footer-brand"><strong>SND Brightlife CBO</strong><p>Empowering People. Creating Opportunities. Building Brighter Communities.</p><small>Sindo, Homa Bay County, Kenya</small></div><div><strong>Explore</strong><button onclick="renderSitemapPage('about')">About Us</button><button onclick="renderSitemapPage('projects')">Our Projects</button><button onclick="renderSitemapPage('governance')">Governance</button></div><div><strong>Get involved</strong><button onclick="renderSitemapPage('partner')">Partner With Us</button><button onclick="renderSitemapPage('donate')">Support Our Work</button><button onclick="renderSitemapPage('contact')">Contact Us</button></div><div><strong>Contact</strong><a href="tel:+254711765739">+254 711 765 739</a><a href="mailto:sndbrightlife@gmail.com">sndbrightlife@gmail.com</a><button onclick="renderSitemapPage('terms')">Savings & Loan Information</button></div><div class="sb-footer-bottom">© ${new Date().getFullYear()} SND Brightlife CBO. All rights reserved. <span>Community first · Accountability always</span></div></footer>`;
-            var content = pages[page] || `<section class="sb-section"><h1>Page not found</h1><p>The page you requested could not be found.</p><button class="sb-button sb-button-green" onclick="renderSitemapPage('home')">Back to Home</button></section>`;
+            var content = pages[page] || `<section class="sb-error-page"><div class="sb-error-code">404</div><span class="sb-eyebrow">PAGE NOT FOUND</span><h1>We can’t find that page.</h1><p>The link may be outdated, or the page may have moved. Return to the SND Brightlife CBO homepage to continue exploring our work.</p><button class="sb-button sb-button-green" onclick="renderSitemapPage('home')">Return to Home <span aria-hidden="true">→</span></button></section>`;
             el.innerHTML = '<div class="sb-site">'+nav+'<main class="sb-main">'+content+'</main>'+footer+'</div>';
             document.body.classList.add('public-site-body');
             document.documentElement.classList.add('public-site-html');
@@ -6172,8 +6180,9 @@ html+=`<div class="section-card" id="reportFilters"><div class="section-title"><
             if(mainWrapper){mainWrapper.classList.add('public-site-mode');mainWrapper.style.marginLeft='0';mainWrapper.style.width='100%';mainWrapper.style.maxWidth='100%';mainWrapper.style.padding='0';}
             var landing=document.getElementById('publicHomeLanding'); if(landing) landing.style.display='block';
             var auth=document.getElementById('app'); if(auth) auth.style.display='none';
-            if(page==='home') { try { history.replaceState({brightlife:'home'},'',location.pathname+location.search); } catch(e){} }
-            else { try { history.pushState({brightlife:'sitemap',page:page},'','#'+page); } catch(e){} }
+            if(page==='home') { try { if(pushHistory===false) history.replaceState({brightlife:'home'},'',location.pathname+location.search); else history.replaceState({brightlife:'home'},'',location.pathname+location.search); } catch(e){} }
+            else if(pushHistory!==false) { try { history.pushState({brightlife:'sitemap',page:page},'','#'+page); } catch(e){} }
+            else { try { history.replaceState({brightlife:'sitemap',page:page},'','#'+page); } catch(e){} }
             window.scrollTo({top:0,behavior:'auto'});
         }
         window.renderSitemapPage = renderSitemapPage;
@@ -6212,7 +6221,7 @@ html+=`<div class="section-card" id="reportFilters"><div class="section-title"><
                     <header class="public-main-header">
                         <div class="public-header-inner">
                             <button type="button" class="public-brand" onclick="showPublicHome()" aria-label="SND Brightlife CBO Home">
-                                <img src="assets/images/snd-brightlife-mark.png" alt="SND Brightlife CBO">
+                                <img src="/assets/images/snd-brightlife-mark.png" alt="SND Brightlife CBO">
                                 <span><strong>SND Brightlife CBO</strong><small>Community - Led Solutions for Sustainable Development</small></span>
                             </button>
                             <nav class="public-main-nav" aria-label="Main navigation">
@@ -6545,14 +6554,15 @@ html+=`<div class="section-card" id="reportFilters"><div class="section-title"><
                 var guestBootLoader = document.getElementById('brightlifeBootLoader');
                 if (guestBootLoader) guestBootLoader.style.display = 'none';
                 updateUserInfo(null);
+                var memberAction = new URLSearchParams(window.location.search).get('member');
+                var publicRoute = (window.location.hash || '').replace('#','');
                 showPublicHome(false);
                 hideSidebar();
                 try {
-                    var memberAction = new URLSearchParams(window.location.search).get('member');
-                    var publicRoute = (window.location.hash || '').replace('#','');
                     if (memberAction === 'login') setTimeout(function(){ openMemberLogin(); }, 80);
                     else if (memberAction === 'register') setTimeout(function(){ openMemberRegistration(); }, 80);
-                    else if (['about','programs','approach','finance','membership','projects','partner','contact'].indexOf(publicRoute) >= 0) setTimeout(function(){ showBrightlifeInnerPage(publicRoute, false); }, 80);
+                    else if (['home','about','projects','water','governance','partner','donate','contact','terms','404','notfound'].indexOf(publicRoute) >= 0) setTimeout(function(){ renderSitemapPage(publicRoute, false); }, 80);
+                    else if (['programs','approach','finance','membership'].indexOf(publicRoute) >= 0) setTimeout(function(){ showBrightlifeInnerPage(publicRoute, false); }, 80);
                 } catch (e) {}
                 setElementDisplaySafe('nav-settings', 'none');
                 setElementDisplaySafe('nav-chat', 'none');
